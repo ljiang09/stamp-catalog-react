@@ -19,7 +19,8 @@ function Catalog() {
                     "date": "16 February 1993",
                     "image": "https://i.pinimg.com/236x/6a/36/07/6a3607fa9a02709a7b31e00f0beae0b1--uk-stamps-postage-stamps.jpg",
                     "id": "gVUK4Fpm8f",
-                    "setName": "Marine Timekeepers"
+                    "setName": "Marine Timekeepers",
+                    "owned": true
                 },
                 {
                     "value": "28p",
@@ -27,7 +28,26 @@ function Catalog() {
                     "date": "16 February 1993",
                     "image": "https://i.colnect.net/f/122/883/Escapement-Remontoire-and-Fusée.jpg",
                     "id": "aDU9DW2V99",
-                    "setName": "Marine Timekeepers"
+                    "setName": "Marine Timekeepers",
+                    "owned": false
+                },
+                {
+                    "value": "33p",
+                    "description": "Balance, Spring and Temperature Compensator",
+                    "date": "16 February 1993",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTio_cKMNB3xqhKjEZcn-9Kq92Qh_j1-HLipy1GPti6NECcorxAs1lDt9HepkQ7qiVvcEI&usqp=CAU",
+                    "id": "nSq0rBpbQJ",
+                    "setName": "Marine Timekeepers",
+                    "owned": false
+                },
+                {
+                    "value": "39p",
+                    "description": "Back of Movement",
+                    "date": "16 February 1993",
+                    "image": "https://d2j6dbq0eux0bg.cloudfront.net/images/5904137/1429778373.jpg",
+                    "id": "tOaXHlLief",
+                    "setName": "Marine Timekeepers",
+                    "owned": false
                 }
             ]
         ]
@@ -57,7 +77,6 @@ function Catalog() {
 
     return (
         <>
-            <GlobalStyles styles={{ Tooltip: { opacity: '100%' } }} />
             <h2>Lily's Stamps</h2>
             <p>Sort by: All (other options: sets, singles, full sets, other categories)</p>
 
@@ -69,93 +88,32 @@ function Catalog() {
             }} />
 
             <div style={{display: "inline-block", width: "100vw", marginTop: "1vw"}}>
-                <StampTooltip
-                    stampInfo={stampInfo.sets[0][1]}
-                    open={stampOfInterest === stampInfo.sets[0][1].id}
-                >
-                    <Button
-                        onClick={() => handleClick(stampInfo.sets[0][1].id)}
-                        style={{
-                            display: "inline-block",
-                            width: "9%",
-                            margin: "0 1%",
-                            padding: "0"
-                        }}
+                {stampInfo.sets[0].map((obj, index) => (
+                    <StampTooltip
+                        stampInfo={obj}
+                        open={stampOfInterest === obj.id}
                     >
-                        <img
-                            src={stampInfo.sets[0][1].image}
-                            alt=""
+                        <Button
+                            onClick={() => handleClick(obj.id)}
                             style={{
                                 display: "inline-block",
-                                width: "100%",
-                                filter: "brightness(50%)"
+                                width: "9%",
+                                margin: "0 1%",
+                                padding: "0"
                             }}
-                        />
-                    </Button>
-                </StampTooltip>
-
-                <Button
-                    style={{
-                        display: "inline-block",
-                        width: "9%",
-                        margin: "0 1%",
-                        padding: "0"
-                    }}
-                >
-                    <img
-                        src="https://d2j6dbq0eux0bg.cloudfront.net/images/5904137/1429778373.jpg"
-                        alt=""
-                        style={{
-                            display: "inline-block",
-                            width: "100%",
-                            filter: "brightness(50%)"
-                        }}
-                    />
-                </Button>
-                
-                <StampTooltip
-                    stampInfo={stampInfo.sets[0][0]}
-                    open={stampOfInterest === stampInfo.sets[0][0].id}
-                >
-                    <Button
-                        onClick={() => handleClick(stampInfo.sets[0][0].id)}
-                        style={{
-                            display: "inline-block",
-                            width: "9%",
-                            margin: "0 1%",
-                            padding: "0"
-                        }}
-                    >
-                        <img
-                            src={stampInfo.sets[0][0].image}
-                            alt=""
-                            style={{
-                                display: "block",
-                                width: "100%"
-                            }}
-                        />
-                    </Button>
-                </StampTooltip>
-                
-
-                <Button
-                    style={{
-                        display: "inline-block",
-                        width: "9%",
-                        margin: "0 1%",
-                        padding: "0"
-                    }}
-                >
-                    <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTio_cKMNB3xqhKjEZcn-9Kq92Qh_j1-HLipy1GPti6NECcorxAs1lDt9HepkQ7qiVvcEI&usqp=CAU"
-                        alt=""
-                        style={{
-                            display: "inline-block",
-                            width: "100%",
-                            filter: "brightness(50%)"
-                        }}
-                    />
-                </Button>
+                        >
+                            <img
+                                src={obj.image}
+                                alt=""
+                                style={{
+                                    display: "inline-block",
+                                    width: "100%",
+                                    filter: (obj.owned) ? "none" : "brightness(50%)"
+                                }}
+                            />
+                        </Button>
+                    </StampTooltip>
+                ))}
             </div>
 
 
