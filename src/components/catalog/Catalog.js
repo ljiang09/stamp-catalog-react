@@ -1,6 +1,9 @@
 import {React, useState, useEffect} from "react";
-import {Button, Tooltip} from '@mui/material';
-import BinderImage from "./StampBinder.png"
+import {GlobalStyles, Button, Tooltip} from '@mui/material';
+import BinderImage from "./StampBinder.png";
+import StampTooltip from "./StampTooltip";
+import StampButton from "./StampButton";
+
 // import './Catalog.css';
 
 
@@ -54,6 +57,7 @@ function Catalog() {
 
     return (
         <>
+            <GlobalStyles styles={{ Tooltip: { opacity: '100%' } }} />
             <h2>Lily's Stamps</h2>
             <p>Sort by: All (other options: sets, singles, full sets, other categories)</p>
 
@@ -65,24 +69,30 @@ function Catalog() {
             }} />
 
             <div style={{display: "inline-block", width: "100vw", marginTop: "1vw"}}>
-                <Button
-                    style={{
-                        display: "inline-block",
-                        width: "9%",
-                        margin: "0 1%",
-                        padding: "0"
-                    }}
+                <StampTooltip
+                    stampInfo={stampInfo.sets[0][1]}
+                    open={stampOfInterest === stampInfo.sets[0][1].id}
                 >
-                    <img
-                        src="https://i.colnect.net/f/122/883/Escapement-Remontoire-and-Fusée.jpg"
-                        alt=""
+                    <Button
+                        onClick={() => handleClick(stampInfo.sets[0][1].id)}
                         style={{
                             display: "inline-block",
-                            width: "100%",
-                            filter: "brightness(50%)"
+                            width: "9%",
+                            margin: "0 1%",
+                            padding: "0"
                         }}
-                    />
-                </Button>
+                    >
+                        <img
+                            src={stampInfo.sets[0][1].image}
+                            alt=""
+                            style={{
+                                display: "inline-block",
+                                width: "100%",
+                                filter: "brightness(50%)"
+                            }}
+                        />
+                    </Button>
+                </StampTooltip>
 
                 <Button
                     style={{
@@ -103,21 +113,9 @@ function Catalog() {
                     />
                 </Button>
                 
-                <Tooltip
-                    title={
-                        <>
-                            <h3>{stampInfo.sets[0][0].setName}</h3>
-                            <div>{stampInfo.sets[0][0].value}</div>
-                            <div>{stampInfo.sets[0][0].date}</div>
-                            <p>{stampInfo.sets[0][0].description}</p>
-                        </>
-                    }
-                    arrow
-                    placement="bottom-start"
+                <StampTooltip
+                    stampInfo={stampInfo.sets[0][0]}
                     open={stampOfInterest === stampInfo.sets[0][0].id}
-                    PopperProps={{
-                        style: { opacity: 1 },
-                    }}
                 >
                     <Button
                         onClick={() => handleClick(stampInfo.sets[0][0].id)}
@@ -137,7 +135,7 @@ function Catalog() {
                             }}
                         />
                     </Button>
-                </Tooltip>
+                </StampTooltip>
                 
 
                 <Button
