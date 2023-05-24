@@ -9,10 +9,10 @@ const StampTooltip = ({ stampInfo, open, children }) => {
         TransitionProps={{ timeout: 600 }}
         title={
             <>
-                <h3>{stampInfo.setName}</h3>
-                <div>{stampInfo.value}</div>
-                <div>{stampInfo.date}</div>
-                <p>{stampInfo.description}</p>
+                <h3 style={{fontSize: "1.25vw", padding: "0 0.5vw"}}>{stampInfo.setName}</h3>
+                <div style={{fontSize: "1vw", padding: "0 0.5vw"}}>{stampInfo.value}</div>
+                <div style={{fontSize: "1vw", padding: "0 0.5vw"}}>{stampInfo.date}</div>
+                <p style={{fontSize: "1vw", padding: "0 0.5vw"}}>{stampInfo.description}</p>
             </>
         }
         arrow
@@ -20,7 +20,7 @@ const StampTooltip = ({ stampInfo, open, children }) => {
         open={open}
         PopperProps={{
           style: {
-            maxWidth: "10vw",
+            maxWidth: "15vw",
             opacity: 1, // Set the desired opacity value here
           }
       }}
