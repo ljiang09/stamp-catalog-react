@@ -48,8 +48,8 @@ function Catalog() {
                     display: "flex",
                     flexWrap: "wrap",
                     justifyContent: "center",
-                    width: "60vw",
-                    marginLeft: "20vw"
+                    width: "64vw",
+                    marginLeft: "18vw"
                 }}>
                     {set.map((obj) => (
                         <StampTooltip
