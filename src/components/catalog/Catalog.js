@@ -32,7 +32,7 @@ function Catalog() {
     return (
         <>
             <h2>Lily's Stamps</h2>
-            <p>Sort by: All (other options: sets, singles, full sets, other categories)</p>
+            <p>Sort by: All (other options: sets, singles, full sets, owned, clocks, christmas, other categories)</p>
 
             <img src={BinderImage} alt="stamp binder page" style={{
                 position: "absolute",
@@ -41,9 +41,16 @@ function Catalog() {
                 zIndex: -10
             }} />
 
-            {stampInfo.sets.map((set) => (
+            <div style={{height: "0.5vw"}}></div>
 
-                <div style={{display: "inline-block", width: "100vw", marginTop: "1vw"}}>
+            {stampInfo.sets.map((set) => (
+                <div style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    justifyContent: "center",
+                    width: "60vw",
+                    marginLeft: "20vw"
+                }}>
                     {set.map((obj) => (
                         <StampTooltip
                             stampInfo={obj}
@@ -54,7 +61,7 @@ function Catalog() {
                                 style={{
                                     display: "inline-block",
                                     height: "9.5vw",
-                                    margin: "0.35vw 1vw",
+                                    margin: "0.85vw 1vw",
                                     padding: "0"
                                 }}
                             >
@@ -78,3 +85,9 @@ function Catalog() {
 }
 
 export default Catalog;
+
+
+// TODO:
+// change tooltip back to show info on hover. reserve click for navigating to new page for more info?
+// make tooltip background opaque
+// add tags to each stamp, for easier filtering

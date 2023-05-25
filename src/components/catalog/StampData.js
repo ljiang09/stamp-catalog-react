@@ -77,6 +77,53 @@ const stampInfo = {
                 "setName": "Medieval Life (Commemorative)",
                 "owned": true
             }
+        ],
+        [
+            {
+                "value": "18p",
+                "description": "Angel Gabriel, St James, Pangbourne",
+                "date": "1992",
+                "image": "https://c8.alamy.com/comp/WA20JM/angel-gabriel-stained-glass-window-happy-christmas-postage-stamp-uk-1992-WA20JM.jpg",
+                "id": "gVdK4Fpm8f",
+                "setName": "Christmas 1992 Stained Glass Windows",
+                "owned": true
+            },
+            {
+                "value": "24p",
+                "description": "Madonna and Child, St. Marys Bilbury",
+                "date": "1992",
+                "image": "https://c8.alamy.com/comp/G8HYE0/great-britain-circa-1992-a-stamp-printed-in-great-britain-shows-a-G8HYE0.jpg",
+                "id": "aDU9dW2V99",
+                "setName": "Christmas 1992 Stained Glass Windows",
+                "owned": true
+            },
+            {
+                "value": "28p",
+                "description": "King with Gold, Our Lady and St Peter, Leatherhead",
+                "date": "1992",
+                "image": "https://c8.alamy.com/comp/FD6DN2/postage-stamp-great-britain-queen-elizabeth-ii-1992-christmas-stained-FD6DN2.jpg",
+                "id": "nSq0rBdbQJ",
+                "setName": "Christmas 1992 Stained Glass Windows",
+                "owned": false
+            },
+            {
+                "value": "33p",
+                "description": "Shepherds, All Saints, Porthcawl",
+                "date": "1992",
+                "image": "https://c8.alamy.com/comp/WA20K7/shepherds-stained-glass-window-happy-christmas-postage-stamp-uk-1992-WA20K7.jpg",
+                "id": "tOaXHdLief",
+                "setName": "Christmas 1992 Stained Glass Windows",
+                "owned": false
+            },
+            {
+                "value": "39p",
+                "description": "Kings with Frankincense and Myrrh, Our Lady and St Peter, Leatherhead",
+                "date": "1992",
+                "image": "https://c8.alamy.com/comp/WA20KC/kings-offering-frankincense-and-myrrh-stained-glass-window-happy-christmas-postage-stamp-uk-1992-WA20KC.jpg",
+                "id": "tOaXHdLili",
+                "setName": "Christmas 1992 Stained Glass Windows",
+                "owned": false
+            }
         ]
     ]
 }
