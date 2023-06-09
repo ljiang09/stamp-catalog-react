@@ -1,8 +1,6 @@
 import {React, useState, useEffect} from "react";
-import {Button} from '@mui/material';
 import BinderImage from "./StampBinder.png";
-import StampTooltip from "./StampTooltip";
-// import StampButton from "./StampButton";
+import StampButton from "./components/StampButton";
 import stampInfo from "./StampData";
 
 
@@ -35,29 +33,11 @@ function Catalog() {
                     marginLeft: "18vw"
                 }}>
                     {set.map((obj) => (
-                        <StampTooltip
-                            stampInfo={obj}
-                        >
-                            <Button
-                                onClick={() => handleClick(obj.id)}
-                                style={{
-                                    display: "inline-block",
-                                    height: "9.5vw",
-                                    margin: "0.85vw 1vw",
-                                    padding: "0"
-                                }}
-                            >
-                                <img
-                                    src={obj.image}
-                                    alt=""
-                                    style={{
-                                        display: "inline-block",
-                                        height: "100%",
-                                        filter: (obj.owned) ? "none" : "brightness(50%)"
-                                    }}
-                                />
-                            </Button>
-                        </StampTooltip>
+                        <StampButton
+                            obj={obj}
+                            alt=""
+                            handleClick={handleClick}
+                        />
                     ))}
                 </div>
             ))}
