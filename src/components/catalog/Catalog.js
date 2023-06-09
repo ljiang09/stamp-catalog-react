@@ -1,33 +1,16 @@
 import {React, useState, useEffect} from "react";
-import {GlobalStyles, Button, Tooltip} from '@mui/material';
+import {Button} from '@mui/material';
 import BinderImage from "./StampBinder.png";
 import StampTooltip from "./StampTooltip";
-import StampButton from "./StampButton";
+// import StampButton from "./StampButton";
 import stampInfo from "./StampData";
 
 
 function Catalog() {
-    const [stampOfInterest, setStampOfInterest] = useState("");
-
     const handleClick = (stampName) => {
-        if (stampName === stampOfInterest) {
-            setStampOfInterest("");
-        } else {
-            setStampOfInterest(stampName);
-        }
+        console.log("Stamp clicked:", stampName);
+        // TODO: make this navigate to a new page for just the set, or individual stamp
     };
-
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-          if (!event.target.closest('button')) {
-            setStampOfInterest("");
-          }
-        };
-        document.addEventListener('click', handleClickOutside);
-        return () => {
-          document.removeEventListener('click', handleClickOutside);
-        };
-    }, []);
 
     return (
         <>
@@ -54,7 +37,6 @@ function Catalog() {
                     {set.map((obj) => (
                         <StampTooltip
                             stampInfo={obj}
-                            open={stampOfInterest === obj.id}
                         >
                             <Button
                                 onClick={() => handleClick(obj.id)}
@@ -88,6 +70,6 @@ export default Catalog;
 
 
 // TODO:
-// change tooltip back to show info on hover. reserve click for navigating to new page for more info?
 // make tooltip background opaque
 // add tags to each stamp, for easier filtering
+// move styling to style.js file
