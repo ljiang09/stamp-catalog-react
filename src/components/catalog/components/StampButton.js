@@ -12,7 +12,7 @@ const StampButton = ({obj, alt, handleClick}) => {
             stampInfo={obj}
         >
             <Button
-                onClick={() => handleClick(obj.id)}
+                onClick={() => handleClick(obj)}
                 className={classes.stampBtn}
             >
                 <img

@@ -1,13 +1,19 @@
-import {React, useState, useEffect} from "react";
+import {React} from "react";
+import {useNavigate} from "react-router-dom"
 import BinderImage from "./StampBinder.png";
 import StampButton from "./components/StampButton";
-import stampInfo from "./StampData";
-
+import {stampInfo} from "./StampData";
 
 function Catalog() {
-    const handleClick = (stampName) => {
-        console.log("Stamp clicked:", stampName);
-        // TODO: make this navigate to a new page for just the set, or individual stamp
+    const navigate = useNavigate();
+
+    const handleClick = (stampObj) => {
+        // if set, use "setID". if single, use basic ID
+        if ("setID" in stampObj) {
+            navigate(`/info/${stampObj.setID}`);
+        } else {
+            console.log("Single stamp clicked");
+        }
     };
 
     return (
@@ -32,13 +38,13 @@ function Catalog() {
                     width: "64vw",
                     marginLeft: "18vw"
                 }}>
-                    {set.map((obj) => (
-                        <StampButton
-                            obj={obj}
-                            alt=""
-                            handleClick={handleClick}
-                        />
-                    ))}
+                {set.map((obj) => (
+                    <StampButton
+                        obj={obj}
+                        alt=""
+                        handleClick={handleClick}
+                    />
+                ))}
                 </div>
             ))}
 
