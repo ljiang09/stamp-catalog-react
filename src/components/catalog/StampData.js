@@ -11,7 +11,8 @@ const stampInfo = {
                 "setName": "Marine Timekeepers",
                 "setID": "yy97IH",
                 "owned": true,
-                "height": 35
+                "height": 35,
+                "tags": ["clocks", "Great Britain"]
             },
             {
                 "value": "28p",
@@ -22,7 +23,8 @@ const stampInfo = {
                 "setName": "Marine Timekeepers",
                 "setID": "yy97IH",
                 "owned": false,
-                "height": 35
+                "height": 35,
+                "tags": ["clocks", "Great Britain"]
             },
             {
                 "value": "33p",
@@ -33,7 +35,8 @@ const stampInfo = {
                 "setName": "Marine Timekeepers",
                 "setID": "yy97IH",
                 "owned": false,
-                "height": 35
+                "height": 35,
+                "tags": ["clocks", "Great Britain"]
             },
             {
                 "value": "39p",
@@ -44,7 +47,8 @@ const stampInfo = {
                 "setName": "Marine Timekeepers",
                 "setID": "yy97IH",
                 "owned": false,
-                "height": 35
+                "height": 35,
+                "tags": ["clocks", "Great Britain"]
             }
         ],
         [
@@ -57,7 +61,8 @@ const stampInfo = {
                 "setName": "Medieval Life (Commemorative)",
                 "setID": "r5VlMr",
                 "owned": true,
-                "height": 30
+                "height": 30,
+                "tags": ["medieval", "Great Britain"]
             },
             {
                 "value": "22p",
@@ -68,7 +73,8 @@ const stampInfo = {
                 "setName": "Medieval Life (Commemorative)",
                 "setID": "r5VlMr",
                 "owned": true,
-                "height": 30
+                "height": 30,
+                "tags": ["medieval", "Great Britain"]
             },
             {
                 "value": "31p",
@@ -79,7 +85,8 @@ const stampInfo = {
                 "setName": "Medieval Life (Commemorative)",
                 "setID": "r5VlMr",
                 "owned": true,
-                "height": 30
+                "height": 30,
+                "tags": ["medieval", "Great Britain"]
             },
             {
                 "value": "34p",
@@ -90,7 +97,8 @@ const stampInfo = {
                 "setName": "Medieval Life (Commemorative)",
                 "setID": "r5VlMr",
                 "owned": true,
-                "height": 30
+                "height": 30,
+                "tags": ["medieval", "Great Britain"]
             }
         ],
         [
@@ -103,7 +111,8 @@ const stampInfo = {
                 "setName": "Christmas 1992 Stained Glass Windows",
                 "setID": "3AHrqX",
                 "owned": true,
-                "height": 30
+                "height": 30,
+                "tags": ["christmas", "stained glass", "Great Britain"]
             },
             {
                 "value": "24p",
@@ -114,7 +123,8 @@ const stampInfo = {
                 "setName": "Christmas 1992 Stained Glass Windows",
                 "setID": "3AHrqX",
                 "owned": true,
-                "height": 30
+                "height": 30,
+                "tags": ["christmas", "stained glass", "Great Britain"]
             },
             {
                 "value": "28p",
@@ -125,7 +135,8 @@ const stampInfo = {
                 "setName": "Christmas 1992 Stained Glass Windows",
                 "setID": "3AHrqX",
                 "owned": false,
-                "height": 30
+                "height": 30,
+                "tags": ["christmas", "stained glass", "Great Britain"]
             },
             {
                 "value": "33p",
@@ -136,7 +147,8 @@ const stampInfo = {
                 "setName": "Christmas 1992 Stained Glass Windows",
                 "setID": "3AHrqX",
                 "owned": false,
-                "height": 30
+                "height": 30,
+                "tags": ["christmas", "stained glass", "Great Britain"]
             },
             {
                 "value": "39p",
@@ -147,7 +159,8 @@ const stampInfo = {
                 "setName": "Christmas 1992 Stained Glass Windows",
                 "setID": "3AHrqX",
                 "owned": false,
-                "height": 30
+                "height": 30,
+                "tags": ["christmas", "stained glass", "Great Britain"]
             }
         ],
         [
@@ -161,7 +174,8 @@ const stampInfo = {
                 "setID": "GzCchJ",
                 "owned": true,
                 "width": 30,
-                "height": 41
+                "height": 41,
+                "tags": ["cartoon", "Great Britain"]
             },
             {
                 "value": "25p",
@@ -173,7 +187,8 @@ const stampInfo = {
                 "setID": "GzCchJ",
                 "owned": false,
                 "width": 30,
-                "height": 41
+                "height": 41,
+                "tags": ["cartoon", "Great Britain"]
             },
             {
                 "value": "30p",
@@ -185,7 +200,8 @@ const stampInfo = {
                 "setID": "GzCchJ",
                 "owned": false,
                 "width": 30,
-                "height": 41
+                "height": 41,
+                "tags": ["cartoon", "Great Britain"]
             },
             {
                 "value": "35p",
@@ -197,7 +213,8 @@ const stampInfo = {
                 "setID": "GzCchJ",
                 "owned": false,
                 "width": 30,
-                "height": 41
+                "height": 41,
+                "tags": ["cartoon", "Great Britain"]
             },
             {
                 "value": "41p",
@@ -209,7 +226,8 @@ const stampInfo = {
                 "setID": "GzCchJ",
                 "owned": false,
                 "width": 30,
-                "height": 41
+                "height": 41,
+                "tags": ["cartoon", "Great Britain"]
             }
         ]
     ]

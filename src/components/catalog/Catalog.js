@@ -40,6 +40,7 @@ function Catalog() {
                 }}>
                 {set.map((obj) => (
                     <StampButton
+                        key={obj.id}
                         obj={obj}
                         alt=""
                         handleClick={handleClick}
