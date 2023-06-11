@@ -1,236 +1,198 @@
 const stampInfo = {
     "singles": [],
-    "sets": [
-        [
-            {
-                "value": "24p",
-                "description": "Decorated enamel dial",
-                "date": "16 February 1993",
-                "image": "https://i.pinimg.com/236x/6a/36/07/6a3607fa9a02709a7b31e00f0beae0b1--uk-stamps-postage-stamps.jpg",
-                "id": "gVUK4Fpm8f",
-                "setName": "Marine Timekeepers",
-                "setID": "yy97IH",
-                "owned": true,
-                "height": 35,
-                "tags": ["clocks", "Great Britain"]
-            },
-            {
-                "value": "28p",
-                "description": "Escapement, Remontoire and Fusee",
-                "date": "16 February 1993",
-                "image": "https://i.colnect.net/f/122/883/Escapement-Remontoire-and-Fusée.jpg",
-                "id": "aDU9DW2V99",
-                "setName": "Marine Timekeepers",
-                "setID": "yy97IH",
-                "owned": false,
-                "height": 35,
-                "tags": ["clocks", "Great Britain"]
-            },
-            {
-                "value": "33p",
-                "description": "Balance, Spring and Temperature Compensator",
-                "date": "16 February 1993",
-                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTio_cKMNB3xqhKjEZcn-9Kq92Qh_j1-HLipy1GPti6NECcorxAs1lDt9HepkQ7qiVvcEI&usqp=CAU",
-                "id": "nSq0rBpbQJ",
-                "setName": "Marine Timekeepers",
-                "setID": "yy97IH",
-                "owned": false,
-                "height": 35,
-                "tags": ["clocks", "Great Britain"]
-            },
-            {
-                "value": "39p",
-                "description": "Back of Movement",
-                "date": "16 February 1993",
-                "image": "https://d2j6dbq0eux0bg.cloudfront.net/images/5904137/1429778373.jpg",
-                "id": "tOaXHlLief",
-                "setName": "Marine Timekeepers",
-                "setID": "yy97IH",
-                "owned": false,
-                "height": 35,
-                "tags": ["clocks", "Great Britain"]
-            }
-        ],
-        [
-            {
-                "value": "17p",
-                "description": "Peasants Working in Fields",
-                "date": "June 17 1986",
-                "image": "https://www.collectgbstamps.co.uk/images/gb/1986/1986_572.jpg",
-                "id": "70yHIner0V",
-                "setName": "Medieval Life (Commemorative)",
-                "setID": "r5VlMr",
-                "owned": true,
-                "height": 30,
-                "tags": ["medieval", "Great Britain"]
-            },
-            {
-                "value": "22p",
-                "description": "Freemen working at Town Trades",
-                "date": "June 17 1986",
-                "image": "https://www.collectgbstamps.co.uk/images/gb/1986/1986_573.jpg",
-                "id": "N7MUsAa34g",
-                "setName": "Medieval Life (Commemorative)",
-                "setID": "r5VlMr",
-                "owned": true,
-                "height": 30,
-                "tags": ["medieval", "Great Britain"]
-            },
-            {
-                "value": "31p",
-                "description": "Knight and Retainers",
-                "date": "June 17 1986",
-                "image": "https://www.collectgbstamps.co.uk/images/gb/1986/1986_574.jpg",
-                "id": "PvIPdGa16H",
-                "setName": "Medieval Life (Commemorative)",
-                "setID": "r5VlMr",
-                "owned": true,
-                "height": 30,
-                "tags": ["medieval", "Great Britain"]
-            },
-            {
-                "value": "34p",
-                "description": "Lord at Banquet",
-                "date": "June 17 1986",
-                "image": "https://www.collectgbstamps.co.uk/images/gb/1986/1986_575_l.jpg",
-                "id": "ZmPQWYJWDe",
-                "setName": "Medieval Life (Commemorative)",
-                "setID": "r5VlMr",
-                "owned": true,
-                "height": 30,
-                "tags": ["medieval", "Great Britain"]
-            }
-        ],
-        [
-            {
-                "value": "18p",
-                "description": "Angel Gabriel, St James, Pangbourne",
-                "date": "1992",
-                "image": "https://c8.alamy.com/comp/WA20JM/angel-gabriel-stained-glass-window-happy-christmas-postage-stamp-uk-1992-WA20JM.jpg",
-                "id": "gVdK4Fpm8f",
-                "setName": "Christmas 1992 Stained Glass Windows",
-                "setID": "3AHrqX",
-                "owned": true,
-                "height": 30,
-                "tags": ["christmas", "stained glass", "Great Britain"]
-            },
-            {
-                "value": "24p",
-                "description": "Madonna and Child, St. Marys Bilbury",
-                "date": "1992",
-                "image": "https://c8.alamy.com/comp/G8HYE0/great-britain-circa-1992-a-stamp-printed-in-great-britain-shows-a-G8HYE0.jpg",
-                "id": "aDU9dW2V99",
-                "setName": "Christmas 1992 Stained Glass Windows",
-                "setID": "3AHrqX",
-                "owned": true,
-                "height": 30,
-                "tags": ["christmas", "stained glass", "Great Britain"]
-            },
-            {
-                "value": "28p",
-                "description": "King with Gold, Our Lady and St Peter, Leatherhead",
-                "date": "1992",
-                "image": "https://c8.alamy.com/comp/FD6DN2/postage-stamp-great-britain-queen-elizabeth-ii-1992-christmas-stained-FD6DN2.jpg",
-                "id": "nSq0rBdbQJ",
-                "setName": "Christmas 1992 Stained Glass Windows",
-                "setID": "3AHrqX",
-                "owned": false,
-                "height": 30,
-                "tags": ["christmas", "stained glass", "Great Britain"]
-            },
-            {
-                "value": "33p",
-                "description": "Shepherds, All Saints, Porthcawl",
-                "date": "1992",
-                "image": "https://c8.alamy.com/comp/WA20K7/shepherds-stained-glass-window-happy-christmas-postage-stamp-uk-1992-WA20K7.jpg",
-                "id": "tOaXHdLief",
-                "setName": "Christmas 1992 Stained Glass Windows",
-                "setID": "3AHrqX",
-                "owned": false,
-                "height": 30,
-                "tags": ["christmas", "stained glass", "Great Britain"]
-            },
-            {
-                "value": "39p",
-                "description": "Kings with Frankincense and Myrrh, Our Lady and St Peter, Leatherhead",
-                "date": "1992",
-                "image": "https://c8.alamy.com/comp/WA20KC/kings-offering-frankincense-and-myrrh-stained-glass-window-happy-christmas-postage-stamp-uk-1992-WA20KC.jpg",
-                "id": "tOaXHdLili",
-                "setName": "Christmas 1992 Stained Glass Windows",
-                "setID": "3AHrqX",
-                "owned": false,
-                "height": 30,
-                "tags": ["christmas", "stained glass", "Great Britain"]
-            }
-        ],
-        [
-            {
-                "value": "19p",
-                "description": "Bather at Blackpool",
-                "date": "April 12 1994",
-                "image": "https://www.collectgbstamps.co.uk/images/phq/large/phq160a.jpg",
-                "id": "eKt05Hmefs",
-                "setName": "Pictoral Postcards (Commemorative)",
-                "setID": "GzCchJ",
-                "owned": true,
-                "width": 30,
-                "height": 41,
-                "tags": ["cartoon", "Great Britain"]
-            },
-            {
-                "value": "25p",
-                "description": "'Where's my Little Lad?'",
-                "date": "April 12 1994",
-                "image": "https://www.collectgbstamps.co.uk/images/phq/large/phq160b.jpg",
-                "id": "hnjlPTkPvr",
-                "setName": "Pictoral Postcards (Commemorative)",
-                "setID": "GzCchJ",
-                "owned": false,
-                "width": 30,
-                "height": 41,
-                "tags": ["cartoon", "Great Britain"]
-            },
-            {
-                "value": "30p",
-                "description": "'Wish You were Here!'",
-                "date": "April 12 1994",
-                "image": "https://www.collectgbstamps.co.uk/images/phq/large/phq160c.jpg",
-                "id": "m3kOJxQK4H",
-                "setName": "Pictoral Postcards (Commemorative)",
-                "setID": "GzCchJ",
-                "owned": false,
-                "width": 30,
-                "height": 41,
-                "tags": ["cartoon", "Great Britain"]
-            },
-            {
-                "value": "35p",
-                "description": "Punch and Judy Show",
-                "date": "April 12 1994",
-                "image": "https://www.collectgbstamps.co.uk/images/phq/large/phq160d.jpg",
-                "id": "F6jdKTggGr",
-                "setName": "Pictoral Postcards (Commemorative)",
-                "setID": "GzCchJ",
-                "owned": false,
-                "width": 30,
-                "height": 41,
-                "tags": ["cartoon", "Great Britain"]
-            },
-            {
-                "value": "41p",
-                "description": "'The Tower Crane' Machine",
-                "date": "April 12 1994",
-                "image": "https://www.collectgbstamps.co.uk/images/phq/large/phq160e.jpg",
-                "id": "rkZtNDj2Qa",
-                "setName": "Pictoral Postcards (Commemorative)",
-                "setID": "GzCchJ",
-                "owned": false,
-                "width": 30,
-                "height": 41,
-                "tags": ["cartoon", "Great Britain"]
-            }
-        ]
-    ]
+    "sets": {
+        "yy97IH": {
+            "setName": "Marine Timekeepers",
+            "tags": ["clocks", "Great Britain"],
+            "stamps": [
+                {
+                    "value": "24p",
+                    "description": "Decorated enamel dial",
+                    "date": "16 February 1993",
+                    "image": "https://i.pinimg.com/236x/6a/36/07/6a3607fa9a02709a7b31e00f0beae0b1--uk-stamps-postage-stamps.jpg",
+                    "id": "gVUK4Fpm8f",
+                    "owned": true,
+                    "height": 35
+                },
+                {
+                    "value": "28p",
+                    "description": "Escapement, Remontoire and Fusee",
+                    "date": "16 February 1993",
+                    "image": "https://i.colnect.net/f/122/883/Escapement-Remontoire-and-Fusée.jpg",
+                    "id": "aDU9DW2V99",
+                    "owned": false,
+                    "height": 35
+                },
+                {
+                    "value": "33p",
+                    "description": "Balance, Spring and Temperature Compensator",
+                    "date": "16 February 1993",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTio_cKMNB3xqhKjEZcn-9Kq92Qh_j1-HLipy1GPti6NECcorxAs1lDt9HepkQ7qiVvcEI&usqp=CAU",
+                    "id": "nSq0rBpbQJ",
+                    "owned": false,
+                    "height": 35
+                },
+                {
+                    "value": "39p",
+                    "description": "Back of Movement",
+                    "date": "16 February 1993",
+                    "image": "https://d2j6dbq0eux0bg.cloudfront.net/images/5904137/1429778373.jpg",
+                    "id": "tOaXHlLief",
+                    "owned": false,
+                    "height": 35
+                }
+            ]
+        },
+        "r5VlMr": {
+            "setName": "Medieval Life (Commemorative)",
+            "tags": ["medieval", "Great Britain"],
+            "stamps": [
+                {
+                    "value": "17p",
+                    "description": "Peasants Working in Fields",
+                    "date": "June 17 1986",
+                    "image": "https://www.collectgbstamps.co.uk/images/gb/1986/1986_572.jpg",
+                    "id": "70yHIner0V",
+                    "owned": true,
+                    "height": 30
+                },
+                {
+                    "value": "22p",
+                    "description": "Freemen working at Town Trades",
+                    "date": "June 17 1986",
+                    "image": "https://www.collectgbstamps.co.uk/images/gb/1986/1986_573.jpg",
+                    "id": "N7MUsAa34g",
+                    "owned": true,
+                    "height": 30
+                },
+                {
+                    "value": "31p",
+                    "description": "Knight and Retainers",
+                    "date": "June 17 1986",
+                    "image": "https://www.collectgbstamps.co.uk/images/gb/1986/1986_574.jpg",
+                    "id": "PvIPdGa16H",
+                    "owned": true,
+                    "height": 30
+                },
+                {
+                    "value": "34p",
+                    "description": "Lord at Banquet",
+                    "date": "June 17 1986",
+                    "image": "https://www.collectgbstamps.co.uk/images/gb/1986/1986_575_l.jpg",
+                    "id": "ZmPQWYJWDe",
+                    "owned": true,
+                    "height": 30
+                }
+            ]
+        },
+        "3AHrqX": {
+            "setName": "Christmas 1992 Stained Glass Windows",
+            "tags": ["christmas", "stained glass", "Great Britain"],
+            "stamps": [
+                {
+                    "value": "18p",
+                    "description": "Angel Gabriel, St James, Pangbourne",
+                    "date": "1992",
+                    "image": "https://c8.alamy.com/comp/WA20JM/angel-gabriel-stained-glass-window-happy-christmas-postage-stamp-uk-1992-WA20JM.jpg",
+                    "id": "gVdK4Fpm8f",
+                    "owned": true,
+                    "height": 30
+                },
+                {
+                    "value": "24p",
+                    "description": "Madonna and Child, St. Marys Bilbury",
+                    "date": "1992",
+                    "image": "https://c8.alamy.com/comp/G8HYE0/great-britain-circa-1992-a-stamp-printed-in-great-britain-shows-a-G8HYE0.jpg",
+                    "id": "aDU9dW2V99",
+                    "owned": true,
+                    "height": 30
+                },
+                {
+                    "value": "28p",
+                    "description": "King with Gold, Our Lady and St Peter, Leatherhead",
+                    "date": "1992",
+                    "image": "https://c8.alamy.com/comp/FD6DN2/postage-stamp-great-britain-queen-elizabeth-ii-1992-christmas-stained-FD6DN2.jpg",
+                    "id": "nSq0rBdbQJ",
+                    "owned": false,
+                    "height": 30
+                },
+                {
+                    "value": "33p",
+                    "description": "Shepherds, All Saints, Porthcawl",
+                    "date": "1992",
+                    "image": "https://c8.alamy.com/comp/WA20K7/shepherds-stained-glass-window-happy-christmas-postage-stamp-uk-1992-WA20K7.jpg",
+                    "id": "tOaXHdLief",
+                    "owned": false,
+                    "height": 30
+                },
+                {
+                    "value": "39p",
+                    "description": "Kings with Frankincense and Myrrh, Our Lady and St Peter, Leatherhead",
+                    "date": "1992",
+                    "image": "https://c8.alamy.com/comp/WA20KC/kings-offering-frankincense-and-myrrh-stained-glass-window-happy-christmas-postage-stamp-uk-1992-WA20KC.jpg",
+                    "id": "tOaXHdLili",
+                    "owned": false,
+                    "height": 30
+                }
+            ]
+        },
+        "GzCchJ": {
+            "setName": "Pictoral Postcards (Commemorative)",
+            "tags": ["cartoon", "Great Britain"],
+            "stamps": [
+                {
+                    "value": "19p",
+                    "description": "Bather at Blackpool",
+                    "date": "April 12 1994",
+                    "image": "https://www.collectgbstamps.co.uk/images/phq/large/phq160a.jpg",
+                    "id": "eKt05Hmefs",
+                    "owned": true,
+                    "width": 30,
+                    "height": 41
+                },
+                {
+                    "value": "25p",
+                    "description": "'Where's my Little Lad?'",
+                    "date": "April 12 1994",
+                    "image": "https://www.collectgbstamps.co.uk/images/phq/large/phq160b.jpg",
+                    "id": "hnjlPTkPvr",
+                    "owned": false,
+                    "width": 30,
+                    "height": 41
+                },
+                {
+                    "value": "30p",
+                    "description": "'Wish You were Here!'",
+                    "date": "April 12 1994",
+                    "image": "https://www.collectgbstamps.co.uk/images/phq/large/phq160c.jpg",
+                    "id": "m3kOJxQK4H",
+                    "owned": false,
+                    "width": 30,
+                    "height": 41
+                },
+                {
+                    "value": "35p",
+                    "description": "Punch and Judy Show",
+                    "date": "April 12 1994",
+                    "image": "https://www.collectgbstamps.co.uk/images/phq/large/phq160d.jpg",
+                    "id": "F6jdKTggGr",
+                    "owned": false,
+                    "width": 30,
+                    "height": 41
+                },
+                {
+                    "value": "41p",
+                    "description": "'The Tower Crane' Machine",
+                    "date": "April 12 1994",
+                    "image": "https://www.collectgbstamps.co.uk/images/phq/large/phq160e.jpg",
+                    "id": "rkZtNDj2Qa",
+                    "owned": false,
+                    "width": 30,
+                    "height": 41
+                }
+            ]
+        }
+    }
 }
 
 

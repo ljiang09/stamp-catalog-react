@@ -1,8 +1,6 @@
 TODO:
 make tooltip background opaque
-add tags to each stamp, for easier filtering
 create filtering capabilities based on tags
-refactor data system to prevent repeat values in sets (set name, tags, date, etc)
 create a custom and dynamic background w/ pure css or something crazy like that
 connect to firebase
 

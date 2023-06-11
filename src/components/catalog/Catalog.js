@@ -7,11 +7,12 @@ import {stampInfo} from "./StampData";
 function Catalog() {
     const navigate = useNavigate();
 
-    const handleClick = (stampObj) => {
-        // if set, use "setID". if single, use basic ID
-        if ("setID" in stampObj) {
-            navigate(`/info/${stampObj.setID}`);
+    const handleClick = (setID, stampObj) => {
+        // sets will have a "stamps" key
+        if ("stamps" in stampObj) {
+            navigate(`/info/${setID}`);
         } else {
+            // if set, use "setID". if single, use basic ID
             console.log("Single stamp clicked");
         }
     };
@@ -30,7 +31,7 @@ function Catalog() {
 
             <div style={{height: "0.5vw"}}></div>
 
-            {stampInfo.sets.map((set) => (
+            {Object.entries(stampInfo.sets).map(([key, value]) => (
                 <div style={{
                     display: "flex",
                     flexWrap: "wrap",
@@ -38,14 +39,16 @@ function Catalog() {
                     width: "64vw",
                     marginLeft: "18vw"
                 }}>
-                {set.map((obj) => (
-                    <StampButton
-                        key={obj.id}
-                        obj={obj}
-                        alt=""
-                        handleClick={handleClick}
-                    />
-                ))}
+                    {value.stamps.map((obj) => (
+                        <StampButton
+                            key={obj.id}
+                            obj={obj}
+                            setName={value.setName}
+                            tags={value.tags}
+                            alt=""
+                            handleClick={() => handleClick(key, value)}
+                        />
+                    ))}
                 </div>
             ))}
 
