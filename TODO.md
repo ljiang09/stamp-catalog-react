@@ -1,6 +1,7 @@
 TODO:
 make tooltip background opaque
 create filtering capabilities based on tags
+create sort-by capability - note that you can have both filtering and sorting at the same time
 create a custom and dynamic background w/ pure css or something crazy like that
 connect to firebase
 
