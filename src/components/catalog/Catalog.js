@@ -4,10 +4,13 @@ import { Autocomplete, TextField } from "@mui/material";
 import BinderImage from "./StampBinder.png";
 import StampButton from "./components/StampButton";
 import {stampInfo, tagsList} from "./StampData";
+import useStyles from './styles.js'
 
 function Catalog() {
     const [selectedFilters, setSelectedFilters] = useState([]);
     const [displayedStamps, setDisplayedStamps] = useState(stampInfo);
+
+    const classes = useStyles();
 
     useEffect(() => {
         // set the displayedStamps based on the selected filters
@@ -50,30 +53,19 @@ function Catalog() {
                 options={tagsList}
                 onChange={(event, value) => setSelectedFilters(value)}
                 renderInput={(params) => <TextField {...params} label="Filter by:" />}
-                style={{width: "30vw", marginLeft: "35vw"}}
+                className={classes.filterBy}
             />
 
             <p>Sort by: All (other options: sets, singles, full sets, owned, clocks, christmas, other categories)</p>
 
             <div style={{height: "0.5vw"}}></div>
 
-            <img src={BinderImage} alt="stamp binder page" style={{
-                position: "absolute",
-                width: "70%",
-                left: "13%",
-                zIndex: -10
-            }} />
+            <img src={BinderImage} alt="stamp binder page" className={classes.binderBackground} />
 
             <div style={{height: "0.5vw"}}></div>
 
             {Object.entries(displayedStamps.sets).map(([key, value]) => (
-                <div style={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    justifyContent: "center",
-                    width: "64vw",
-                    marginLeft: "18vw"
-                }}>
+                <div className={classes.stampRow}>
                     {value.stamps.map((obj) => (
                         <StampButton
                             key={obj.id}
