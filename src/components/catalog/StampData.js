@@ -224,4 +224,14 @@ const stampInfoDetailed = {
     }
 };
 
-export {stampInfo, stampInfoDetailed};
+// the idea is that this is a dictionary of all created tags
+const tagsList = [
+    "Great Britain",
+    "clocks",
+    "medieval",
+    "christmas",
+    "stained glass",
+    "cartoon"
+];
+
+export {stampInfo, stampInfoDetailed, tagsList};

@@ -1,9 +1,9 @@
 import {React, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom"
-import { Autocomplete, Button } from "@mui/material";
+import { Autocomplete, TextField } from "@mui/material";
 import BinderImage from "./StampBinder.png";
 import StampButton from "./components/StampButton";
-import {stampInfo} from "./StampData";
+import {stampInfo, tagsList} from "./StampData";
 
 function Catalog() {
     const [selectedFilters, setSelectedFilters] = useState([]);
@@ -44,9 +44,14 @@ function Catalog() {
         <>
             <h2>Lily's Stamps</h2>
 
-            {/* <Autocomplete /> */}
-            <Button onClick={() => {setSelectedFilters(["clocks"])}}>Filter by clocks</Button>
-            <Button onClick={() => {setSelectedFilters([])}}>Filter by none</Button>
+{/* need the selected parameters to update the thing */}
+            <Autocomplete
+                multiple
+                options={tagsList}
+                onChange={(event, value) => setSelectedFilters(value)}
+                renderInput={(params) => <TextField {...params} label="Filter by:" />}
+                style={{width: "30vw", marginLeft: "35vw"}}
+            />
 
             <p>Sort by: All (other options: sets, singles, full sets, owned, clocks, christmas, other categories)</p>
 
