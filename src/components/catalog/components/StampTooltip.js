@@ -18,7 +18,7 @@ const StampTooltip = ({ stampInfo, setName, tags, children }) => {
                 <p className={classes.tooltipInfo}>{stampInfo.date}</p>
                 <div className={classes.tagsSection}>
                   {tags.map((tag) => (
-                    <span className={classes.tags}>
+                    <span className={classes.tags} key={tag}>
                       {tag}
                     </span>
                   ))}

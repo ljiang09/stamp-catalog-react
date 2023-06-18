@@ -78,7 +78,7 @@ function Catalog() {
         <div style={{height: "0.5vw"}}></div>
 
         {displayedStamps.hasOwnProperty("sets") && Object.entries(displayedStamps.sets).map(([key, value]) => (
-          <div className={classes.stampRow}>
+          <div className={classes.stampRow} key={key}>
             {value.stamps.map((obj) => (
               <StampButton
                 key={obj.id}
