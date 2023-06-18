@@ -8,7 +8,9 @@ function Upload() {
     const handleUploadType = (event, newUploadType) => {
         setUploadType(newUploadType);
         // show either the single or set view
-    };    
+    };
+
+    // handle submit - add a UID to it
 
     return (
         <>
@@ -28,24 +30,63 @@ function Upload() {
             <br />
             <br />
 
-            {(uploadType === "single") ? (
-                <>
-                    <h2>Single</h2>
-                    <form>
-                        <label>Stamp name</label>
-                        <input type="text" />
-                        <br />
-                        <label>ncjksnj</label>
-                        <input type="text" />
-                        <br />
-                        <input type="submit" />
-                    </form>
-                </>
-            ) : (
-                <>
-                    <h2>Set</h2>
-                </>
-            )}
+            <div style={{width: "300px", margin: "0px 40vw"}}>
+                {(uploadType === "single") ? (
+                    <>
+                        <h2>Single</h2>
+                        <form style={{textAlign: "left"}}>
+                            <label>Stamp name</label>
+                            <input type="text" />
+                            <br />
+                            <label>Value</label>
+                            <input type="text" />
+                            <br />
+                            <label>Date</label>
+                            <input type="text" />
+                            <br />
+                            <label>Description</label>
+                            <input type="text" />
+                            <br />
+                            <label>Image Link</label>
+                            <input type="text" />
+                            <br />
+                            <label>Owned</label>
+                            <input type="checkbox" />
+                            <br />
+                            <input type="submit" />
+                        </form>
+                    </>
+                ) : (
+                    <>
+                        <h2>Set</h2>
+                        <form style={{textAlign: "left"}}>
+                            <label>Set Name</label>
+                            <input type="text" />
+                            <br />
+                            <br />
+                            <label>Stamp name</label>
+                            <input type="text" />
+                            <br />
+                            <label>Value</label>
+                            <input type="text" />
+                            <br />
+                            <label>Date</label>
+                            <input type="text" />
+                            <br />
+                            <label>Description</label>
+                            <input type="text" />
+                            <br />
+                            <label>Image Link</label>
+                            <input type="text" />
+                            <br />
+                            <label>Owned</label>
+                            <input type="checkbox" />
+                            <br />
+                            <input type="submit" />
+                        </form>
+                    </>
+                )}
+            </div>
         </>
     );
     }
