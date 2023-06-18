@@ -1,6 +1,6 @@
 import {React, useState} from "react";
 import {ToggleButton, ToggleButtonGroup} from '@mui/material';
-
+import UploadOneStamp from "./UploadOneStamp"
 
 function Upload() {
     const [uploadType, setUploadType] = useState('single');
@@ -32,30 +32,7 @@ function Upload() {
 
             <div style={{width: "300px", margin: "0px 40vw"}}>
                 {(uploadType === "single") ? (
-                    <>
-                        <h2>Single</h2>
-                        <form style={{textAlign: "left"}}>
-                            <label>Stamp name</label>
-                            <input type="text" />
-                            <br />
-                            <label>Value</label>
-                            <input type="text" />
-                            <br />
-                            <label>Date</label>
-                            <input type="text" />
-                            <br />
-                            <label>Description</label>
-                            <input type="text" />
-                            <br />
-                            <label>Image Link</label>
-                            <input type="text" />
-                            <br />
-                            <label>Owned</label>
-                            <input type="checkbox" />
-                            <br />
-                            <input type="submit" />
-                        </form>
-                    </>
+                    <UploadOneStamp />
                 ) : (
                     <>
                         <h2>Set</h2>
