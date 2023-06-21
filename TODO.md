@@ -5,7 +5,9 @@ create a custom and dynamic background w/ pure css or something crazy like that
 connect to firebase
 
 finish upload capabilities
-add screen to update/edit stamps
+add settings screen to update/edit stamps
+- also add button wihtin catalog tooltips to directly edit each stamp. Note that sets should be edited all together, so editing one will edit them all
+- add space to select tags, and post those to firebase
 
 replace "stampInfoDetailed" dataset with just a bunch of individual markdown files that are embedded within the page so you can add images and such
 

@@ -1,5 +1,5 @@
 import {initializeApp} from 'https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js';
-import {get, getDatabase, ref as ref_database, set} from 'https://www.gstatic.com/firebasejs/9.16.0/firebase-database.js';
+import {get, getDatabase, ref as ref_database, set, push} from 'https://www.gstatic.com/firebasejs/9.16.0/firebase-database.js';
 import {getDownloadURL, getStorage, ref as ref_storage, uploadBytesResumable} from 'https://www.gstatic.com/firebasejs/9.16.0/firebase-storage.js';
 import {useState} from 'react';
 
@@ -54,4 +54,35 @@ const retrieveCatalog = (setAllStamps) => {
       });
 };
 
-export {initialPost, retrieveCatalog};
+
+const { v4: uuidv4 } = require('uuid');
+
+const uploadSingle = (params) => {
+  const uuid = uuidv4();
+
+  set(ref_database(db, 'stampInfo/singles/' + uuid), {
+    name: params.name,
+    value: params.value,
+    date: params.date,
+    description: params.description,
+    imgLink: params.imgLink,
+    owned: params.owned
+  })
+    .then(function() {
+      window.alert('Uploaded!');
+      // TODO: clear all the textfields
+      // clearInputsSingle(params);
+    })
+    .catch(function(error) {
+      // TODO: better error handling
+      console.log('Synchronization failed');
+    });
+};
+
+const clearInputsSingle = (params) => {
+  // set all values to "", except the "owned" which should be {false}
+}
+
+
+
+export {initialPost, retrieveCatalog, uploadSingle};
