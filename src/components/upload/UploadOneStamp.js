@@ -1,5 +1,10 @@
-import {React, useState, useEffect} from "react";
-import {FormControl, Button, FormControlLabel, Checkbox} from '@mui/material';
+import { React, useState, useEffect } from "react";
+import {
+  FormControl,
+  Button,
+  FormControlLabel,
+  Checkbox,
+} from "@mui/material";
 import InputField from "./InputField";
 import { uploadSingle } from "../../server/Firebase";
 
@@ -89,12 +94,20 @@ function UploadOneStamp() {
                     error={showingImgError}
                     errorMsg={showingImgError ? "Link must be valid" : ""}
                 />
-                <FormControlLabel checked={owned} onChange={(event) => setOwned(event.target.value)} required control={<Checkbox />} label="Owned" />
-                <Button variant="outlined" onClick={handleClick}>Submit</Button>
+        <FormControlLabel
+          checked={owned}
+          onChange={(event) => setOwned(event.target.value)}
+          required
+          control={<Checkbox />}
+          label="Owned"
+        />
+        <Button variant="outlined" onClick={handleClick}>
+          Submit
+        </Button>
+        <div style={{ height: "100px" }} />
             </FormControl>
         </>
     );
     }
-
 
 export default UploadOneStamp;
