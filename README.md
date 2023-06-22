@@ -14,3 +14,10 @@ In the project directory, you can run: `npm start`.
 This runs the app in development mode in your browser. It should
 automatically open a tab in your default browser, or you can manually open
 [http://localhost:3000](http://localhost:3000) to view it.
+
+
+## Dependencies
+
+Material UI
+
+npm install uuid
