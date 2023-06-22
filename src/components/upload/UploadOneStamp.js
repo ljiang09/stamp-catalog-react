@@ -26,13 +26,11 @@ function UploadOneStamp() {
         
         // only name and image link are required here
         if (name.trim().length < 3) {
-            console.log("error with name");
             error = true;
             setShowingNameError(true);
         }
         // TODO: figure out some way to verify that the submitted link is valid
         if (imgLink.trim().length < 3) {
-            console.log("error with iamge link");
             error = true;
             setShowingImgError(true);
         }
@@ -48,15 +46,21 @@ function UploadOneStamp() {
                 owned
             };
 
-            uploadSingle(stampInfo);
-            // TODO: somehow in the closure, clear all the text fields and check box
+    const clearInputsSingle = () => {
+        setName("");
+        setValue("");
+        setDate("");
+        setDescription("");
+        setImgLink("");
+        setOwned(false);
         }
+
+      uploadSingle(stampInfo, clearInputsSingle);
     }
 
     return (
         <>
             <h2>Single</h2>
-            {/* TODO: add info tooltips for each input */}
             <FormControl>
                 <InputField
                     value={name}

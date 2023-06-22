@@ -57,31 +57,27 @@ const retrieveCatalog = (setAllStamps) => {
 
 const { v4: uuidv4 } = require('uuid');
 
-const uploadSingle = (params) => {
+const uploadSingle = (stampInfo, successCallback) => {
   const uuid = uuidv4();
 
-  set(ref_database(db, 'stampInfo/singles/' + uuid), {
-    name: params.name,
-    value: params.value,
-    date: params.date,
-    description: params.description,
-    imgLink: params.imgLink,
-    owned: params.owned
+  // set(ref_database(db, 'stampInfo/singles/' + uuid), {
+  set(ref_database(db, 'stampInfo/tester/' + uuid), {
+    name: stampInfo.name,
+    value: stampInfo.value,
+    date: stampInfo.date,
+    description: stampInfo.description,
+    imgLink: stampInfo.imgLink,
+    owned: stampInfo.owned
   })
     .then(function() {
       window.alert('Uploaded!');
-      // TODO: clear all the textfields
-      // clearInputsSingle(params);
+      successCallback();
     })
     .catch(function(error) {
       // TODO: better error handling
       console.log('Synchronization failed');
     });
 };
-
-const clearInputsSingle = (params) => {
-  // set all values to "", except the "owned" which should be {false}
-}
 
 
 
