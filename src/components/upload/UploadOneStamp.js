@@ -4,6 +4,8 @@ import {
   Button,
   FormControlLabel,
   Checkbox,
+  Autocomplete,
+  TextField,
 } from "@mui/material";
 import InputField from "./InputField";
 import { uploadSingle } from "../../server/Firebase";
@@ -15,6 +17,7 @@ function UploadOneStamp() {
     const [description, setDescription] = useState("");
     const [imgLink, setImgLink] = useState("");
     const [owned, setOwned] = useState(false);
+  const [tags, setTags] = useState([]);
 
     const [showingNameError, setShowingNameError] = useState(false);
     const [showingImgError, setShowingImgError] = useState(false);
@@ -43,7 +46,8 @@ function UploadOneStamp() {
                 date,
                 description,
                 imgLink,
-                owned
+        owned,
+        tags,
             };
 
     const clearInputsSingle = () => {
@@ -53,7 +57,8 @@ function UploadOneStamp() {
         setDescription("");
         setImgLink("");
         setOwned(false);
-        }
+        setTags([]);
+      };
 
       uploadSingle(stampInfo, clearInputsSingle);
     }
@@ -104,6 +109,30 @@ function UploadOneStamp() {
           required
           control={<Checkbox />}
           label="Owned"
+        />
+        {/* TODO: when user adds custom input, add it to tags list in backend upon submission */}
+        {/* TODO: prevent menu from closing upon selecting a tag */}
+        <Autocomplete
+          multiple
+          value={tags}
+          onChange={(event, values) => {
+            setTags(values);
+          }}
+          options={[
+            "Great Britain",
+            "clocks",
+            "medieval",
+            "christmas",
+            "stained glass",
+            "cartoon",
+            "lighthouse",
+            "architecture",
+            "Disney",
+          ]}
+          renderInput={(params) => (
+            <TextField {...params} label="Tags" variant="outlined" />
+          )}
+          style={{ marginBottom: "10px", width: "200px" }}
         />
         <Button variant="outlined" onClick={handleClick}>
           Submit
