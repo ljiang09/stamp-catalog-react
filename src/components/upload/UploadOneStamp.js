@@ -8,7 +8,7 @@ import {
   TextField,
 } from "@mui/material";
 import InputField from "./InputField";
-import { uploadSingle } from "../../server/Firebase";
+import { retrieveTags, uploadSingle } from "../../server/Firebase";
 
 function UploadOneStamp() {
     const [name, setName] = useState("");
@@ -21,6 +21,15 @@ function UploadOneStamp() {
 
     const [showingNameError, setShowingNameError] = useState(false);
     const [showingImgError, setShowingImgError] = useState(false);
+
+  const [tagsOptions, setTagsOptions] = useState([]);
+
+  // TODO: figure out a way to update the tagsOptions upon new tags being entered
+  useEffect(() => {
+    retrieveTags((value) => {
+      setTagsOptions(value);
+    });
+  }, []);
 
     const handleClick = () => {
         setShowingNameError(false);
@@ -62,6 +71,8 @@ function UploadOneStamp() {
 
       uploadSingle(stampInfo, clearInputsSingle);
     }
+  };
+
 
     return (
         <>
@@ -118,17 +129,7 @@ function UploadOneStamp() {
           onChange={(event, values) => {
             setTags(values);
           }}
-          options={[
-            "Great Britain",
-            "clocks",
-            "medieval",
-            "christmas",
-            "stained glass",
-            "cartoon",
-            "lighthouse",
-            "architecture",
-            "Disney",
-          ]}
+          options={tagsOptions}
           renderInput={(params) => (
             <TextField {...params} label="Tags" variant="outlined" />
           )}
