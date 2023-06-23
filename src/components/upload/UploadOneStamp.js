@@ -56,6 +56,8 @@ function UploadOneStamp() {
 
         // if all good, submit to firebase
         if (!error) {
+      const customTags = tags.filter((option) => !tagsOptions.includes(option));
+
             const stampInfo = {
                 name,
                 value,
@@ -64,6 +66,7 @@ function UploadOneStamp() {
                 imgLink,
         owned,
         tags,
+        customTags,
             };
 
     const clearInputsSingle = () => {
@@ -99,7 +102,6 @@ function UploadOneStamp() {
                     label="Value"
                     info="Monetary value listed on stamp"
                 />
-                {/* TODO: replace the date input with calendar selection */}
                 <InputField
                     value={date}
                     handleChange={(event) => setDate(event.target.value)}
