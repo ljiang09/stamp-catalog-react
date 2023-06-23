@@ -7,6 +7,10 @@ import {
   Autocomplete,
   TextField,
 } from "@mui/material";
+import {
+  CheckBoxOutlineBlank as CheckBoxOutlineBlankIcon,
+  CheckBox as CheckBoxIcon,
+} from "@mui/icons-material";
 import InputField from "./InputField";
 import { retrieveTags, uploadSingle } from "../../server/Firebase";
 
@@ -23,6 +27,9 @@ function UploadOneStamp() {
     const [showingImgError, setShowingImgError] = useState(false);
 
   const [tagsOptions, setTagsOptions] = useState([]);
+
+  const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+  const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
   // TODO: figure out a way to update the tagsOptions upon new tags being entered
   useEffect(() => {
@@ -125,13 +132,29 @@ function UploadOneStamp() {
         {/* TODO: prevent menu from closing upon selecting a tag */}
         <Autocomplete
           multiple
+          freeSolo
+          disableCloseOnSelect
+          selectOnFocus
           value={tags}
+          disableClearable
+          forcePopupIcon
           onChange={(event, values) => {
             setTags(values);
           }}
-          options={tagsOptions}
+          options={tagsOptions.sort()}
           renderInput={(params) => (
             <TextField {...params} label="Tags" variant="outlined" />
+          )}
+          renderOption={(props, option, { selected }) => (
+            <li {...props}>
+              <Checkbox
+                icon={icon}
+                checkedIcon={checkedIcon}
+                style={{ margin: 0 }}
+                checked={selected}
+              />
+              {option}
+            </li>
           )}
           style={{ marginBottom: "10px", width: "200px" }}
         />

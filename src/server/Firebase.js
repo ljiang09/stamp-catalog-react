@@ -64,6 +64,22 @@ const retrieveCatalog = (setAllStamps) => {
     });
 };
 
+const retrieveTags = (callback) => {
+  get(ref_database(db, "tags/"))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        callback(snapshot.val());
+      } else {
+        console.log("No tags available");
+        callback([]);
+      }
+    })
+    .catch((error) => {
+      console.error("error with loading tags info", error);
+      callback([]);
+    });
+};
+
 const { v4: uuidv4 } = require("uuid");
 
 const uploadSingle = (stampInfo, successCallback) => {
@@ -89,4 +105,4 @@ const uploadSingle = (stampInfo, successCallback) => {
     });
 };
 
-export { initialPost, retrieveCatalog, uploadSingle };
+export { initialPost, retrieveCatalog, retrieveTags, uploadSingle };
