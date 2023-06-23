@@ -121,13 +121,6 @@ function UploadOneStamp() {
                     error={showingImgError}
                     errorMsg={showingImgError ? "Link must be valid" : ""}
                 />
-        <FormControlLabel
-          checked={owned}
-          onChange={(event) => setOwned(event.target.value)}
-          required
-          control={<Checkbox />}
-          label="Owned"
-        />
         {/* TODO: when user adds custom input, add it to tags list in backend upon submission */}
         {/* TODO: prevent menu from closing upon selecting a tag */}
         <Autocomplete
@@ -156,9 +149,23 @@ function UploadOneStamp() {
               {option}
             </li>
           )}
-          style={{ marginBottom: "10px", width: "200px" }}
+          style={{
+            marginTop: "15px",
+            width: "200px",
+          }}
         />
-        <Button variant="outlined" onClick={handleClick}>
+        <FormControlLabel
+          checked={owned}
+          onChange={(event) => setOwned(event.target.value)}
+          required
+          control={<Checkbox />}
+          label="Owned"
+        />
+        <Button
+          variant="outlined"
+          onClick={handleClick}
+          style={{ width: "200px" }}
+        >
           Submit
         </Button>
         <div style={{ height: "100px" }} />
