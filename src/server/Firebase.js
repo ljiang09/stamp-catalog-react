@@ -82,6 +82,7 @@ const retrieveTags = (callback) => {
 
 const { v4: uuidv4 } = require("uuid");
 
+// TODO: add better error handling
 const uploadSingle = (stampInfo, successCallback) => {
   const uuid = uuidv4();
 
@@ -96,12 +97,32 @@ const uploadSingle = (stampInfo, successCallback) => {
     tags: stampInfo.tags,
   })
     .then(function () {
-      window.alert("Uploaded!");
-      successCallback();
+      if (stampInfo.customTags.length > 0) {
+        // update the custom tags to the tags database
+        get(ref_database(db, "tags/"))
+          .then((snapshot) => {
+            const currTags = snapshot.val() || [];
+            const updatedTags = [...currTags, ...stampInfo.customTags];
+
+            set(ref_database(db, "tags/"), updatedTags)
+              .then(function () {
+                window.alert("Uploaded with custom tags!");
+                successCallback();
+              })
+              .catch(function (error) {
+                console.log("error with updating tags", error);
+              });
+          })
+          .catch((error) => {
+            console.error("error with getting tags from database", error);
+          });
+      } else {
+        window.alert("Uploaded!");
+        successCallback();
+      }
     })
     .catch(function (error) {
-      // TODO: better error handling
-      console.log("Synchronization failed");
+      console.log("Synchronization failed", error);
     });
 };
 
