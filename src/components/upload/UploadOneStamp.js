@@ -37,6 +37,7 @@ function UploadOneStamp() {
   // TODO: use imgFile properties for file size (to calculate compression), and maybe to display name
   const [imgFile, setImgFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
+  const [savableImg, setSavableImg] = useState(false);
 
   const [showingNameError, setShowingNameError] = useState(false);
   const [showingImgError, setShowingImgError] = useState(false);
@@ -131,6 +132,7 @@ function UploadOneStamp() {
     });
   }, []);
 
+  // determine if img URL is valid
   useEffect(() => {
     const img = new Image();
     img.onload = () => {
@@ -142,6 +144,7 @@ function UploadOneStamp() {
     img.src = imgLink;
   }, [imgLink]);
 
+  // store uploaded file as base64 to display
   useEffect(() => {
     if (imgFile) {
       const reader = new FileReader();
@@ -153,6 +156,18 @@ function UploadOneStamp() {
       setImagePreview(null);
     }
   }, [imgFile]);
+
+  // disable "save" button in image dialog
+  useEffect(() => {
+    if (
+      (imgUploadType === "url" && imgLinkValid) ||
+      (imgUploadType === "file" && imagePreview)
+    ) {
+      setSavableImg(true);
+    } else {
+      setSavableImg(false);
+    }
+  }, [imgUploadType, imgLinkValid, imagePreview]);
 
   return (
     <>
@@ -430,7 +445,11 @@ function UploadOneStamp() {
               </Button>
             </Grid>
             <Grid item>
-              <Button variant="outlined" onClick={handleImgUploadSave}>
+              <Button
+                variant="outlined"
+                onClick={handleImgUploadSave}
+                disabled={!savableImg}
+              >
                 Save
               </Button>
             </Grid>
