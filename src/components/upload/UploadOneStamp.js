@@ -9,10 +9,14 @@ import {
   Dialog,
   ToggleButton,
   ToggleButtonGroup,
+  Box,
+  Typography,
+  Grid,
 } from "@mui/material";
 import {
   CheckBoxOutlineBlank as CheckBoxOutlineBlankIcon,
   CheckBox as CheckBoxIcon,
+  Image as ImageIcon,
 } from "@mui/icons-material";
 import InputField from "./InputField";
 import { retrieveTags, uploadSingle } from "../../server/Firebase";
@@ -140,6 +144,7 @@ function UploadOneStamp() {
           onClick={() => {
             setOpenImgUpload(true);
           }}
+          style={{ width: "200px", marginTop: "15px" }}
         >
           Choose Image
         </Button>
@@ -205,18 +210,22 @@ function UploadOneStamp() {
           style={{
             padding: "20px",
             alignItems: "center",
+            width: "210px",
+            height: "350px",
           }}
         >
           <ToggleButtonGroup
             value={imgUploadType}
             onChange={handleUploadType}
             exclusive
+            style={{ marginBottom: "20px" }}
           >
             <ToggleButton value="url">Paste Link</ToggleButton>
             <ToggleButton value="file">Upload</ToggleButton>
           </ToggleButtonGroup>
           {imgUploadType === "url" ? (
             <>
+              {/* TODO: change the error handling of this */}
               <InputField
                 value={imgLink}
                 handleChange={(event) => setImgLink(event.target.value)}
@@ -225,26 +234,50 @@ function UploadOneStamp() {
                 error={showingImgError}
                 errorMsg={showingImgError ? "Link must be valid" : ""}
               />
+              {/* TODO: change this conditional */}
               {imgLink.length < 10 ? (
-                <div
+                <Box
                   style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                     width: "200px",
                     height: "200px",
-                    background: "gray",
+                    background: "lightgray",
                     marginTop: "10px",
-                    display: "flex",
-                    alignContent: "center",
-                    justifyContent: "center",
                   }}
                 >
-                  Image appears here
-                </div>
+                  <Grid
+                    container
+                    direction="column"
+                    justify="center"
+                    alignItems="center"
+                  >
+                    <Grid item>
+                      <ImageIcon
+                        style={{
+                          fontSize: "50px",
+                          color: "gray",
+                        }}
+                      />
+                    </Grid>
+                    <Grid item>
+                      <Typography
+                        style={{
+                          color: "gray",
+                        }}
+                      >
+                        Enter a valid URL
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Box>
               ) : (
                 <div
                   style={{
-                    width: "200px",
-                    height: "200px",
-                    margin: "10px",
+                    width: "160px",
+                    height: "160px",
+                    margin: "20px",
                     display: "flex",
                     alignContent: "center",
                     justifyContent: "center",
@@ -255,13 +288,11 @@ function UploadOneStamp() {
               )}
             </>
           ) : (
-            <div>button to file upload</div>
+            <>
+              <div>button to file upload</div>
+              {/* // TODO: display the uploaded image here */}
+            </>
           )}
-
-          {/* // TODO: display the uploaded image here */}
-
-          {/* // in this dialog, display the image and handle it if it cannot be */}
-          {/* displayed */}
         </div>
       </Dialog>
     </>
