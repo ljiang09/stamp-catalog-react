@@ -20,29 +20,30 @@ import {
 } from "@mui/icons-material";
 import InputField from "./InputField";
 import { retrieveTags, uploadSingle } from "../../server/Firebase";
+import useStyles from "./styles.js";
 
 function UploadOneStamp() {
   const [name, setName] = useState("");
   const [value, setValue] = useState("");
   const [date, setDate] = useState("");
   const [description, setDescription] = useState("");
+  const [owned, setOwned] = useState(false);
+  const [tags, setTags] = useState([]);
+
+  const [openImgUpload, setOpenImgUpload] = useState(false);
+  const [imgUploadType, setImgUploadType] = useState("url");
   const [imgLink, setImgLink] = useState("");
   const [imgLinkValid, setImgLinkValid] = useState(false);
   // TODO: use imgFile properties for file size (to calculate compression), and maybe to display name
   const [imgFile, setImgFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
-  const [owned, setOwned] = useState(false);
-  const [tags, setTags] = useState([]);
-  const [openImgUpload, setOpenImgUpload] = useState(false);
-  const [imgUploadType, setImgUploadType] = useState("url");
 
   const [showingNameError, setShowingNameError] = useState(false);
   const [showingImgError, setShowingImgError] = useState(false);
 
   const [tagsOptions, setTagsOptions] = useState([]);
 
-  const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
-  const checkedIcon = <CheckBoxIcon fontSize="small" />;
+  const classes = useStyles();
 
   const handleClick = () => {
     setShowingNameError(false);
@@ -54,8 +55,7 @@ function UploadOneStamp() {
       error = true;
       setShowingNameError(true);
     }
-    // TODO: figure out some way to verify that the submitted link is valid
-    if (imgLink.trim().length < 3) {
+    if (!imgLink && !imagePreview) {
       error = true;
       setShowingImgError(true);
     }
@@ -64,12 +64,15 @@ function UploadOneStamp() {
     if (!error) {
       const customTags = tags.filter((option) => !tagsOptions.includes(option));
 
+      // choose either the imgLink or imagePreview to submit
+      const submittableImg = imgLink ? imgLink : imagePreview;
+
       const stampInfo = {
         name,
         value,
         date,
         description,
-        imgLink,
+        submittableImg,
         owned,
         tags,
         customTags,
@@ -98,8 +101,17 @@ function UploadOneStamp() {
   };
 
   const handleImgUploadSave = () => {
+    // TODO: add error handling
+
+    if (imgUploadType === "url") {
+      setImgFile(null);
+      setImagePreview(null);
+    } else {
+      setImgLink("");
+      setImgLinkValid(false);
+    }
+
     setOpenImgUpload(false);
-    // TODO: clear either the img upload or the link? and display it in the button txt of the main page
   };
 
   const handleUploadType = (event, newUploadType) => {
@@ -172,17 +184,23 @@ function UploadOneStamp() {
           label="Description"
           info="Brief overview"
         />
-        {/* TODO: add button that shows a dialog. there, choose between uploading or setting url */}
-        {/* TODO: have error handling surrounding this button */}
         <Button
           variant="outlined"
           onClick={() => {
             setOpenImgUpload(true);
           }}
-          style={{ width: "200px", marginTop: "15px" }}
+          style={{
+            width: "200px",
+            marginTop: "15px",
+            color: "black",
+          }}
+          className={showingImgError && classes.imgError}
         >
-          Choose Image
+          {imgLinkValid || imgFile ? "Edit Image" : "Choose Image"}
         </Button>
+        {showingImgError && (
+          <Typography variant="caption">Must select an image</Typography>
+        )}
         {/* TODO: look at "creatable" header in MUI4 page and implement that. Particularly with the dialog popup */}
         <Autocomplete
           multiple
@@ -202,8 +220,8 @@ function UploadOneStamp() {
           renderOption={(props, option, { selected }) => (
             <li {...props}>
               <Checkbox
-                icon={icon}
-                checkedIcon={checkedIcon}
+                icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
+                checkedIcon={<CheckBoxIcon fontSize="small" />}
                 style={{ margin: 0 }}
                 checked={selected}
               />
@@ -330,7 +348,7 @@ function UploadOneStamp() {
                 component="label"
                 style={{ height: "40px", width: "200px" }}
               >
-                Upload Image
+                {imgFile ? "Edit Image" : "Upload Image"}
                 <input
                   type="file"
                   accept="image/*"
