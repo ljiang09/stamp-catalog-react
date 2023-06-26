@@ -95,10 +95,12 @@ function UploadOneStamp() {
   const handleImgUploadClose = () => {
     setOpenImgUpload(false);
     setImgLink("");
+    // TODO: clear the img upload too
   };
 
   const handleImgUploadSave = () => {
     setOpenImgUpload(false);
+    // TODO: clear either the img upload or the link?
   };
 
   const handleUploadType = (event, newUploadType) => {
@@ -206,33 +208,39 @@ function UploadOneStamp() {
         <div style={{ height: "100px" }} />
       </FormControl>
       <Dialog open={openImgUpload} onClose={handleImgUploadClose}>
-        <div
+        <Grid
+          container
+          direction="column"
+          justify="center"
+          alignItems="center"
           style={{
-            padding: "20px",
-            alignItems: "center",
-            width: "210px",
-            height: "350px",
+            width: "240px",
+            height: "400px",
           }}
         >
           <ToggleButtonGroup
             value={imgUploadType}
             onChange={handleUploadType}
             exclusive
-            style={{ marginBottom: "20px" }}
+            style={{ margin: "20px 0" }}
           >
             <ToggleButton value="url">Paste Link</ToggleButton>
             <ToggleButton value="file">Upload</ToggleButton>
           </ToggleButtonGroup>
           {imgUploadType === "url" ? (
             <>
-              {/* TODO: change the error handling of this */}
-              <InputField
+              {/* TODO: change the error handling of this. make it custom, with autofocus */}
+              <TextField
+                size="small"
                 value={imgLink}
-                handleChange={(event) => setImgLink(event.target.value)}
+                onChange={(event) => setImgLink(event.target.value)}
                 label="Image Link"
-                info={null}
-                error={showingImgError}
-                errorMsg={showingImgError ? "Link must be valid" : ""}
+                variant="outlined"
+                style={{ height: "40px", width: "200px" }}
+                // helperText={errorMsg}
+                // className={error && classes.error}
+                // error={showingImgError}
+                // errorMsg={showingImgError ? "Link must be valid" : ""}
               />
               {/* TODO: change this conditional */}
               {imgLink.length < 10 ? (
@@ -273,27 +281,107 @@ function UploadOneStamp() {
                   </Grid>
                 </Box>
               ) : (
-                <div
+                <Box
                   style={{
-                    width: "160px",
-                    height: "160px",
-                    margin: "20px",
-                    display: "flex",
-                    alignContent: "center",
-                    justifyContent: "center",
+                    width: "200px",
+                    height: "200px",
+                    marginTop: "10px",
                   }}
                 >
-                  <img src={imgLink} alt="stamp" style={{ height: "100%" }} />
-                </div>
+                  <img
+                    src={imgLink}
+                    alt="stamp"
+                    style={{ maxHeight: "100%", maxWidth: "100%" }}
+                  />
+                </Box>
               )}
             </>
           ) : (
             <>
-              <div>button to file upload</div>
-              {/* // TODO: display the uploaded image here */}
+              <Button
+                variant="outlined"
+                style={{ height: "40px", width: "200px" }}
+              >
+                Upload Image
+              </Button>
+              {/* TODO: change this conditional */}
+              {imgLink.length < 10 ? (
+                <Box
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "200px",
+                    height: "200px",
+                    background: "lightgray",
+                    marginTop: "10px",
+                  }}
+                >
+                  <Grid
+                    container
+                    direction="column"
+                    justify="center"
+                    alignItems="center"
+                  >
+                    <Grid item>
+                      <ImageIcon
+                        style={{
+                          fontSize: "50px",
+                          color: "gray",
+                        }}
+                      />
+                    </Grid>
+                    <Grid item>
+                      <Typography
+                        style={{
+                          color: "gray",
+                        }}
+                      >
+                        Upload a photo
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Box>
+              ) : (
+                <Box
+                  style={{
+                    width: "200px",
+                    height: "200px",
+                    marginTop: "10px",
+                  }}
+                >
+                  <img
+                    src={imgLink}
+                    alt="stamp"
+                    style={{ maxHeight: "100%", maxWidth: "100%" }}
+                  />
+                </Box>
+              )}
             </>
           )}
-        </div>
+          <Grid
+            container
+            direction="row"
+            style={{
+              padding: "10px 20px",
+              display: "flex",
+              justifyContent: "flex-end",
+              alignItems: "center",
+            }}
+            columnSpacing={1}
+          >
+            <Grid item>
+              <Button variant="outlined" onClick={handleImgUploadClose}>
+                Cancel
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button variant="outlined" onClick={handleImgUploadSave}>
+                Save
+              </Button>
+            </Grid>
+          </Grid>
+        </Grid>
       </Dialog>
     </>
   );
