@@ -27,6 +27,7 @@ function UploadOneStamp() {
   const [date, setDate] = useState("");
   const [description, setDescription] = useState("");
   const [imgLink, setImgLink] = useState("");
+  const [imgLinkValid, setImgLinkValid] = useState(false);
   const [owned, setOwned] = useState(false);
   const [tags, setTags] = useState([]);
   const [openImgUpload, setOpenImgUpload] = useState(false);
@@ -39,13 +40,6 @@ function UploadOneStamp() {
 
   const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
   const checkedIcon = <CheckBoxIcon fontSize="small" />;
-
-  // TODO: figure out a way to update the tagsOptions upon new tags being entered
-  useEffect(() => {
-    retrieveTags((value) => {
-      setTagsOptions(value);
-    });
-  }, []);
 
   const handleClick = () => {
     setShowingNameError(false);
@@ -108,6 +102,26 @@ function UploadOneStamp() {
       setImgUploadType(newUploadType);
     }
   };
+
+  // TODO: figure out a way to update the tagsOptions upon new tags being entered
+  useEffect(() => {
+    retrieveTags((value) => {
+      setTagsOptions(value);
+    });
+  }, []);
+
+  useEffect(() => {
+    const img = new Image();
+    img.onload = () => {
+      console.log("img link is valid");
+      setImgLinkValid(true);
+    };
+    img.onerror = () => {
+      console.log("img link is invalid");
+      setImgLinkValid(false);
+    };
+    img.src = imgLink;
+  }, [imgLink]);
 
   return (
     <>
@@ -242,8 +256,21 @@ function UploadOneStamp() {
                 // error={showingImgError}
                 // errorMsg={showingImgError ? "Link must be valid" : ""}
               />
-              {/* TODO: change this conditional */}
-              {imgLink.length < 10 ? (
+              {imgLinkValid ? (
+                <Box
+                  style={{
+                    width: "200px",
+                    height: "200px",
+                    marginTop: "10px",
+                  }}
+                >
+                  <img
+                    src={imgLink}
+                    alt="stamp"
+                    style={{ maxHeight: "100%", maxWidth: "100%" }}
+                  />
+                </Box>
+              ) : (
                 <Box
                   style={{
                     display: "flex",
@@ -279,20 +306,6 @@ function UploadOneStamp() {
                       </Typography>
                     </Grid>
                   </Grid>
-                </Box>
-              ) : (
-                <Box
-                  style={{
-                    width: "200px",
-                    height: "200px",
-                    marginTop: "10px",
-                  }}
-                >
-                  <img
-                    src={imgLink}
-                    alt="stamp"
-                    style={{ maxHeight: "100%", maxWidth: "100%" }}
-                  />
                 </Box>
               )}
             </>
