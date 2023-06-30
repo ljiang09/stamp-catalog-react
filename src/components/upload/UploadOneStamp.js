@@ -65,15 +65,13 @@ function UploadOneStamp() {
     if (!error) {
       const customTags = tags.filter((option) => !tagsOptions.includes(option));
 
-      // choose either the imgLink or imagePreview to submit
-      const submittableImg = imgLink ? imgLink : imagePreview;
-
       const stampInfo = {
         name,
         value,
         date,
         description,
-        submittableImg,
+        imgLink,
+        imagePreview,
         owned,
         tags,
         customTags,
@@ -84,7 +82,7 @@ function UploadOneStamp() {
         setValue("");
         setDate("");
         setDescription("");
-        setImgLink("");
+        handleImgUploadClose();
         setOwned(false);
         setTags([]);
       };
@@ -102,8 +100,6 @@ function UploadOneStamp() {
   };
 
   const handleImgUploadSave = () => {
-    // TODO: add error handling
-
     if (imgUploadType === "url") {
       setImgFile(null);
       setImagePreview(null);

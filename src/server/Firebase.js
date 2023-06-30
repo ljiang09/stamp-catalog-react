@@ -86,44 +86,106 @@ const { v4: uuidv4 } = require("uuid");
 const uploadSingle = (stampInfo, successCallback) => {
   const uuid = uuidv4();
 
-  // set(ref_database(db, 'stampInfo/singles/' + uuid), {
-  set(ref_database(db, "stampInfo/tester/" + uuid), {
-    name: stampInfo.name,
-    value: stampInfo.value,
-    date: stampInfo.date,
-    description: stampInfo.description,
-    imgLink: stampInfo.imgLink,
-    owned: stampInfo.owned,
-    tags: stampInfo.tags,
-  })
-    .then(function () {
-      if (stampInfo.customTags.length > 0) {
-        // update the custom tags to the tags database
-        get(ref_database(db, "tags/"))
-          .then((snapshot) => {
-            const currTags = snapshot.val() || [];
-            const updatedTags = [...currTags, ...stampInfo.customTags];
+  if (stampInfo.imgLink) {
+    console.log("image uploaded as link", stampInfo.imgLink);
+    // TODO: bug where some links cause an error when trying to upload them to firebase
 
-            set(ref_database(db, "tags/"), updatedTags)
-              .then(function () {
-                window.alert("Uploaded with custom tags!");
-                successCallback();
-              })
-              .catch(function (error) {
-                console.log("error with updating tags", error);
-              });
-          })
-          .catch((error) => {
-            console.error("error with getting tags from database", error);
-          });
-      } else {
-        window.alert("Uploaded!");
-        successCallback();
-      }
+    // set(ref_database(db, 'stampInfo/singles/' + uuid), {
+    set(ref_database(db, "stampInfo/tester/" + uuid), {
+      name: stampInfo.name,
+      value: stampInfo.value,
+      date: stampInfo.date,
+      description: stampInfo.description,
+      imgLink: stampInfo.imgLink,
+      owned: stampInfo.owned,
+      tags: stampInfo.tags,
     })
-    .catch(function (error) {
-      console.log("Synchronization failed", error);
+      .then(function () {
+        if (stampInfo.customTags.length > 0) {
+          // update the custom tags to the tags database
+          get(ref_database(db, "tags/"))
+            .then((snapshot) => {
+              const currTags = snapshot.val() || [];
+              const updatedTags = [...currTags, ...stampInfo.customTags];
+
+              set(ref_database(db, "tags/"), updatedTags)
+                .then(function () {
+                  window.alert("Uploaded with custom tags!");
+                  successCallback();
+                })
+                .catch(function (error) {
+                  console.log("error with updating tags", error);
+                });
+            })
+            .catch((error) => {
+              console.error("error with getting tags from database", error);
+            });
+        } else {
+          window.alert("Uploaded!");
+          successCallback();
+        }
+      })
+      .catch(function (error) {
+        console.log("Synchronization failed", error);
+      });
+  } else {
+    console.log("image uploaded as file");
+
+    // TODO: fix the file format of "stampInfo.imagePreview"
+    uploadBytesResumable(
+      ref_storage(storage, "images/singles/tester/" + uuid),
+      stampInfo.imagePreview
+    ).then((snapshot) => {
+      // console.log('Uploaded image,', snapshot.totalBytes, 'bytes.');
+      getDownloadURL(snapshot.ref)
+        .then((url) => {
+          // set(ref_database(db, 'stampInfo/singles/' + uuid), {
+          set(ref_database(db, "stampInfo/tester/" + uuid), {
+            name: stampInfo.name,
+            value: stampInfo.value,
+            date: stampInfo.date,
+            description: stampInfo.description,
+            imgLink: url,
+            owned: stampInfo.owned,
+            tags: stampInfo.tags,
+          })
+            .then(function () {
+              if (stampInfo.customTags.length > 0) {
+                // update the custom tags to the tags database
+                get(ref_database(db, "tags/"))
+                  .then((snapshot) => {
+                    const currTags = snapshot.val() || [];
+                    const updatedTags = [...currTags, ...stampInfo.customTags];
+
+                    set(ref_database(db, "tags/"), updatedTags)
+                      .then(function () {
+                        window.alert("Uploaded with custom tags!");
+                        successCallback();
+                      })
+                      .catch(function (error) {
+                        console.log("error with updating tags", error);
+                      });
+                  })
+                  .catch((error) => {
+                    console.error(
+                      "error with getting tags from database",
+                      error
+                    );
+                  });
+              } else {
+                window.alert("Uploaded!");
+                successCallback();
+              }
+            })
+            .catch(function (error) {
+              console.log("Synchronization failed", error);
+            });
+        })
+        .catch((error) => {
+          console.error("Upload failed", error);
+        });
     });
+  }
 };
 
 export { initialPost, retrieveCatalog, retrieveTags, uploadSingle };
