@@ -200,12 +200,7 @@ function UploadOneStamp() {
           onClick={() => {
             setOpenImgUpload(true);
           }}
-          style={{
-            width: "200px",
-            marginTop: "15px",
-            color: "black",
-          }}
-          className={showingImgError && classes.imgError}
+          className={showingImgError ? classes.imgError : classes.imgDialog}
         >
           {imgLinkValid || imgFile ? "Edit Image" : "Choose Image"}
         </Button>
@@ -239,10 +234,7 @@ function UploadOneStamp() {
               {option}
             </li>
           )}
-          style={{
-            marginTop: "15px",
-            width: "200px",
-          }}
+          className={classes.tagsDropdown}
         />
         <FormControlLabel
           checked={owned}
@@ -254,7 +246,7 @@ function UploadOneStamp() {
         <Button
           variant="outlined"
           onClick={handleClick}
-          style={{ width: "200px" }}
+          className={classes.submitBtn}
         >
           Submit
         </Button>
@@ -266,23 +258,19 @@ function UploadOneStamp() {
           direction="column"
           justify="center"
           alignItems="center"
-          style={{
-            width: "240px",
-            height: "400px",
-          }}
+          className={classes.dialogGrid}
         >
           <ToggleButtonGroup
             value={imgUploadType}
             onChange={handleUploadType}
             exclusive
-            style={{ margin: "20px 0" }}
+            className={classes.imgToggle}
           >
             <ToggleButton value="url">Paste Link</ToggleButton>
             <ToggleButton value="file">Upload</ToggleButton>
           </ToggleButtonGroup>
           {imgUploadType === "url" ? (
             <>
-              {/* TODO: change the error handling of this */}
               <TextField
                 autoFocus
                 size="small"
@@ -290,41 +278,15 @@ function UploadOneStamp() {
                 onChange={(event) => setImgLink(event.target.value)}
                 label="Image Link"
                 variant="outlined"
-                style={{ height: "40px", width: "200px" }}
-                // helperText={errorMsg}
-                // className={error && classes.error}
-                // error={showingImgError}
-                // errorMsg={showingImgError ? "Link must be valid" : ""}
+                className={classes.imgLinkInput}
               />
               {imgLinkValid ? (
-                <Box
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "200px",
-                    height: "200px",
-                    marginTop: "10px",
-                  }}
-                >
-                  <img
-                    src={imgLink}
-                    alt="stamp"
-                    style={{ maxHeight: "100%", maxWidth: "100%" }}
-                  />
+                <Box className={classes.imgDisplay}>
+                  <img src={imgLink} alt="stamp" className={classes.img} />
                 </Box>
               ) : (
-                <Box
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "200px",
-                    height: "200px",
-                    background: "lightgray",
-                    marginTop: "10px",
-                  }}
-                >
+                // TODO: there should be a button that places the focus on the textfield
+                <Box className={classes.imgPlaceholder}>
                   <Grid
                     container
                     direction="column"
@@ -332,19 +294,10 @@ function UploadOneStamp() {
                     alignItems="center"
                   >
                     <Grid item>
-                      <ImageIcon
-                        style={{
-                          fontSize: "50px",
-                          color: "gray",
-                        }}
-                      />
+                      <ImageIcon className={classes.imgPlaceholderIcon} />
                     </Grid>
                     <Grid item>
-                      <Typography
-                        style={{
-                          color: "gray",
-                        }}
-                      >
+                      <Typography className={classes.text}>
                         Enter a valid URL
                       </Typography>
                     </Grid>
@@ -357,7 +310,7 @@ function UploadOneStamp() {
               <Button
                 variant="outlined"
                 component="label"
-                style={{ height: "40px", width: "200px" }}
+                className={classes.imgLinkInput}
               >
                 {imgFile ? "Edit Image" : "Upload Image"}
                 <input
@@ -368,34 +321,12 @@ function UploadOneStamp() {
                 />
               </Button>
               {imagePreview ? (
-                <Box
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "200px",
-                    height: "200px",
-                    marginTop: "10px",
-                  }}
-                >
-                  <img
-                    src={imagePreview}
-                    alt="stamp"
-                    style={{ maxHeight: "100%", maxWidth: "100%" }}
-                  />
+                <Box className={classes.imgDisplay}>
+                  <img src={imagePreview} alt="stamp" className={classes.img} />
                 </Box>
               ) : (
-                <Box
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "200px",
-                    height: "200px",
-                    background: "lightgray",
-                    marginTop: "10px",
-                  }}
-                >
+                // TODO: there should be a button to open the file explorer
+                <Box className={classes.imgPlaceholder}>
                   <Grid
                     container
                     direction="column"
@@ -403,19 +334,10 @@ function UploadOneStamp() {
                     alignItems="center"
                   >
                     <Grid item>
-                      <ImageIcon
-                        style={{
-                          fontSize: "50px",
-                          color: "gray",
-                        }}
-                      />
+                      <ImageIcon className={classes.imgPlaceholderIcon} />
                     </Grid>
                     <Grid item>
-                      <Typography
-                        style={{
-                          color: "gray",
-                        }}
-                      >
+                      <Typography className={classes.text}>
                         Upload a photo
                       </Typography>
                     </Grid>
@@ -427,12 +349,7 @@ function UploadOneStamp() {
           <Grid
             container
             direction="row"
-            style={{
-              padding: "10px 20px",
-              display: "flex",
-              justifyContent: "flex-end",
-              alignItems: "center",
-            }}
+            className={classes.imgDialogButtons}
             columnSpacing={1}
           >
             <Grid item>
