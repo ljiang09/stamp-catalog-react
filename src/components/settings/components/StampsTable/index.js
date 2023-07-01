@@ -30,17 +30,21 @@ function StampsTable() {
 
   // TODO: figure out if this should better be in tree format
   return (
-    <TableContainer component={Paper} style={{ width: "70%", margin: "auto" }}>
+    <TableContainer
+      component={Paper}
+      style={{ width: "70%", margin: "auto", maxHeight: "70vh" }}
+    >
       <Table sx={{ minWidth: 650 }} aria-label="table">
         <TableHead>
           <TableRow>
             <TableCell>Stamp Name</TableCell>
             <TableCell>Date</TableCell>
             <TableCell>Value</TableCell>
-            <TableCell>Height</TableCell>
+            <TableCell>Description</TableCell>
             <TableCell>Image</TableCell>
             <TableCell>Owned</TableCell>
-            <TableCell>Set Name (N/A if single)</TableCell>
+            <TableCell>Height</TableCell>
+            <TableCell>Set Name</TableCell>
             <TableCell>Edit</TableCell>
           </TableRow>
         </TableHead>
@@ -54,11 +58,12 @@ function StampsTable() {
                   </TableCell>
                   <TableCell>{obj.date ? obj.date : "N/A"}</TableCell>
                   <TableCell>{obj.value ? obj.value : "N/A"}</TableCell>
-                  <TableCell>{obj.height ? obj.height : "N/A"}</TableCell>
+                  <TableCell>Description here</TableCell>
                   <TableCell>idk how to show img</TableCell>{" "}
                   <TableCell>{obj.owned ? "true" : "false"}</TableCell>
+                  <TableCell>{obj.height ? obj.height : "N/A"}</TableCell>
                   <TableCell>
-                    {value.setName ? value.setName : "N/A, or single"}
+                    {value.setName ? value.setName : "Unknown"}
                   </TableCell>
                   <TableCell>
                     <Button onClick={() => console.log("editing")}>Edit</Button>
@@ -66,9 +71,24 @@ function StampsTable() {
                 </TableRow>
               ));
             })}
-          {/* TODO: add map function here */}
-
-          {/* TODO: map the singles too */}
+          {stampInfo.hasOwnProperty("singles") &&
+            Object.entries(stampInfo.singles).map(([key, value]) => (
+              <TableRow key={key}>
+                <TableCell>{value.name ? value.name : "N/A"}</TableCell>
+                <TableCell>{value.date ? value.date : "N/A"}</TableCell>
+                <TableCell>{value.value ? value.value : "N/A"}</TableCell>
+                <TableCell>
+                  {value.description ? value.description : "N/A"}
+                </TableCell>
+                <TableCell>{value.height ? value.height : "N/A"}</TableCell>
+                <TableCell>idk how to show img</TableCell>{" "}
+                <TableCell>{value.owned ? "true" : "false"}</TableCell>
+                <TableCell>N/A, single</TableCell>
+                <TableCell>
+                  <Button onClick={() => console.log("editing")}>Edit</Button>
+                </TableCell>
+              </TableRow>
+            ))}
         </TableBody>
       </Table>
     </TableContainer>
