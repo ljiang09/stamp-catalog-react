@@ -27,11 +27,23 @@
 
 ## Settings screen
 
+### Stamps table
+
 - add table or tree structure to update/edit stamps
+- should have a description column
+- implement editable functionality for each row
+
+### Tags table
+
 - add table to update/edit tags
+- add button to create a tag
 
 ## Data
 
+- `retrieveCatalog` and `retrieveTags` are implemented slightly different with
+  how they return values
+- storing owned is "on/false" instead of "true/false" in firebase
+- stamp sets need to all have a name AND description for each stamp
 - implement central storage to hold local version of tags and stamps. And this
   is the singular endpoint within the app where we communicate with backend
 - there should be an initialization handler, where all data is retrieved and
