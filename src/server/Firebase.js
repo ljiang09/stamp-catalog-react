@@ -91,11 +91,10 @@ const uploadSingle = (stampInfo, successCallback) => {
 
     uploadSingleToDatabase(uuid, stampInfo, successCallback, null);
   } else {
-    // TODO: fix the file format of "stampInfo.imagePreview". currently not an image
-
     uploadBytesResumable(
+      // ref_storage(storage, "images/singles/" + uuid),
       ref_storage(storage, "images/singles/tester/" + uuid),
-      stampInfo.imagePreview
+      stampInfo.imgFile
     ).then((snapshot) => {
       getDownloadURL(snapshot.ref)
         .then((url) => {

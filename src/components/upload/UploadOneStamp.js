@@ -71,7 +71,7 @@ function UploadOneStamp() {
         date,
         description,
         imgLink,
-        imagePreview,
+        imgFile,
         owned,
         tags,
         customTags,
