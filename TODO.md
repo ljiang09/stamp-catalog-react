@@ -11,9 +11,10 @@ add settings screen to update/edit stamps
 - shift upload inputs column left, have a second column to display what it'll
   look like in the catalog. Tooltip and everything.
 
-Add accessibility aria into all components
+There is some kind of error sometimes when uploading a single stamp. not sure
+how to debug it
 
-Bugs: fix "single/set" toggle so you can't unclick either of them
+Add accessibility aria into all components
 
 replace "stampInfoDetailed" dataset with just a bunch of individual markdown
 files that are embedded within the page so you can add images and such

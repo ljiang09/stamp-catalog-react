@@ -7,7 +7,9 @@ function Upload() {
   const [uploadType, setUploadType] = useState("single");
 
   const handleUploadType = (event, newUploadType) => {
-    setUploadType(newUploadType);
+    if (newUploadType) {
+      setUploadType(newUploadType);
+    }
   };
 
   return (
