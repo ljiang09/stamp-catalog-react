@@ -18,8 +18,8 @@ import {
   CheckBox as CheckBoxIcon,
   Image as ImageIcon,
 } from "@mui/icons-material";
-import InputField from "./InputField";
-import { retrieveTags, uploadSingle } from "../../server/Firebase";
+import InputField from "../InputField";
+import { retrieveTags, uploadSingle } from "../../../../server/Firebase";
 import useStyles from "./styles.js";
 
 function UploadOneStamp() {

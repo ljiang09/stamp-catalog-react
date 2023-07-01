@@ -11,8 +11,8 @@ import {
   CheckBoxOutlineBlank as CheckBoxOutlineBlankIcon,
   CheckBox as CheckBoxIcon,
 } from "@mui/icons-material";
-import InputField from "./InputField";
-import { retrieveTags, uploadSingle } from "../../server/Firebase";
+import InputField from "../InputField";
+import { retrieveTags, uploadSingle } from "../../../../server/Firebase";
 
 function UploadSet() {
   const [stampSetName, setStampSetName] = useState("");
