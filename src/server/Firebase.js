@@ -87,13 +87,11 @@ const uploadSingle = (stampInfo, successCallback) => {
   const uuid = uuidv4();
 
   if (stampInfo.imgLink) {
-    // TODO: bug where some user-inputted links cause an error when trying to upload them to firebase
-
     uploadSingleToDatabase(uuid, stampInfo, successCallback, null);
   } else {
     uploadBytesResumable(
-      // ref_storage(storage, "images/singles/" + uuid),
-      ref_storage(storage, "images/singles/tester/" + uuid),
+      ref_storage(storage, "images/singles/" + uuid),
+      // ref_storage(storage, "images/singles/tester/" + uuid),
       stampInfo.imgFile
     ).then((snapshot) => {
       getDownloadURL(snapshot.ref)
@@ -108,8 +106,8 @@ const uploadSingle = (stampInfo, successCallback) => {
 };
 
 const uploadSingleToDatabase = (uuid, stampInfo, successCallback, fileLink) => {
-  // set(ref_database(db, 'stampInfo/singles/' + uuid), {
-  set(ref_database(db, "stampInfo/tester/" + uuid), {
+  set(ref_database(db, "stampInfo/singles/" + uuid), {
+    // set(ref_database(db, "stampInfo/tester/" + uuid), {
     name: stampInfo.name,
     value: stampInfo.value,
     date: stampInfo.date,
