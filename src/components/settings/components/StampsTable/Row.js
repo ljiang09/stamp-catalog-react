@@ -2,10 +2,13 @@ import { React, useState } from "react";
 import {
   TableRow,
   TableCell,
-  Button,
+  IconButton,
   TextField,
   Checkbox,
 } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import CloseIcon from "@mui/icons-material/Close";
+import CheckIcon from "@mui/icons-material/Check";
 import { ThemeProvider } from "@mui/material/styles";
 import useStyles from "./styles.js";
 import theme from "../../../../assets/theme.js";
@@ -113,11 +116,32 @@ function Row({ values, setName }) {
           )}
         </TableCell>
         <TableCell style={{ width: "10%" }}>
-          {/* TODO: add editable image dialog */}
+          {/* TODO: add editable tags dialog */}
           {values.tags ? values.tags : "No tags"}
         </TableCell>
         <TableCell style={{ width: "6%" }}>
-          {values.edit} {/* TODO: change icon while editing */}
+          {editing ? (
+            <>
+              <IconButton onClick={() => setEditing(false)}>
+                <CloseIcon style={{ display: "block" }} />
+              </IconButton>
+              <IconButton onClick={() => setEditing(false)}>
+                <CheckIcon style={{ display: "block" }} />
+              </IconButton>
+            </>
+          ) : (
+            <>
+              <IconButton onClick={() => setEditing(true)}>
+                <EditIcon style={{ display: "block" }} />
+              </IconButton>
+              <IconButton
+                onClick={() => setEditing(false)}
+                style={{ visibility: "hidden" }}
+              >
+                <CloseIcon style={{ display: "block" }} />
+              </IconButton>
+            </>
+          )}
         </TableCell>
       </TableRow>
     </ThemeProvider>
