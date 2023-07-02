@@ -20,8 +20,6 @@ const theme = createTheme({
           style: {
             border: "solid 1px gray",
             fontSize: "14px",
-            paddingLeft: 0,
-            paddingRight: 0,
             textAlign: "center",
           },
         },
