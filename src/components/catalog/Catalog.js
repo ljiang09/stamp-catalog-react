@@ -2,24 +2,26 @@ import { Autocomplete, TextField } from "@mui/material";
 import { React, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { retrieveCatalog } from "../../server/Firebase";
+import { retrieveCatalog, retrieveTags } from "../../server/Firebase";
 
 import StampButton from "./components/StampButton";
 import BinderImage from "./StampBinder.png";
-import { tagsList } from "./StampData";
 import useStyles from "./styles.js";
 
 function Catalog() {
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [displayedStamps, setDisplayedStamps] = useState({});
   const [stampInfo, setStampInfo] = useState({});
+  const [tagsList, setTagsList] = useState([]);
 
   const classes = useStyles();
 
   // retrieve data from firebase upon loading
   useEffect(() => {
-    console.log("Retrieving catalog...");
     retrieveCatalog(setStampInfo);
+    retrieveTags((value) => {
+      setTagsList(value);
+    });
   }, []);
 
   useEffect(() => {
