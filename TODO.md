@@ -6,6 +6,7 @@
 - replace "stampInfoDetailed" dataset with just a bunch of individual markdown
   files that are embedded within the page so you can add images and such
 - make navbar look proper
+- make a theme file
 
 ## Catalog
 
@@ -24,6 +25,7 @@
   like in the catalog
 - BUG: There is some kind of error sometimes when uploading a single stamp. not
   sure how to debug it
+- add "height" attribute to the upload screen
 
 ## Settings screen
 

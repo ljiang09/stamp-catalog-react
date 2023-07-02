@@ -15,17 +15,7 @@ import {
 import { useState } from "react";
 
 import { stampInfo } from "../components/catalog/StampData";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDS3xYZstK58Y8DgpHR8HCyKlJXi3N41cs",
-  authDomain: "stamp-catalogue-6df49.firebaseapp.com",
-  databaseURL: "https://stamp-catalogue-6df49-default-rtdb.firebaseio.com",
-  projectId: "stamp-catalogue-6df49",
-  storageBucket: "stamp-catalogue-6df49.appspot.com",
-  messagingSenderId: "74536590288",
-  appId: "1:74536590288:web:ab55c95d93d24baca8f7d5",
-  measurementId: "G-3NVTTQ81P0",
-};
+import firebaseConfig from "./config";
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
