@@ -83,6 +83,19 @@ function Catalog() {
 
       <div style={{ height: "0.5vw" }}></div>
 
+      {displayedStamps.hasOwnProperty("singles") &&
+        Object.entries(displayedStamps.singles).map(([key, value]) => (
+          <div className={classes.stampRow} key={key}>
+            <StampButton
+              key={value.id}
+              obj={value}
+              setName={null}
+              tags={value.tags}
+              alt="button"
+              handleClick={() => handleClick(key, value)}
+            />
+          </div>
+        ))}
       {displayedStamps.hasOwnProperty("sets") &&
         Object.entries(displayedStamps.sets).map(([key, value]) => (
           <div className={classes.stampRow} key={key}>
@@ -92,7 +105,7 @@ function Catalog() {
                 obj={obj}
                 setName={value.setName}
                 tags={value.tags}
-                alt=""
+                alt="button"
                 handleClick={() => handleClick(key, value)}
               />
             ))}
