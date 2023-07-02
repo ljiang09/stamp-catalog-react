@@ -112,7 +112,7 @@ const uploadSingleToDatabase = (uuid, stampInfo, successCallback, fileLink) => {
     value: stampInfo.value,
     date: stampInfo.date,
     description: stampInfo.description,
-    imgLink: fileLink ? fileLink : stampInfo.imgLink,
+    image: fileLink ? fileLink : stampInfo.imgLink,
     owned: stampInfo.owned,
     tags: stampInfo.tags,
   })
