@@ -18,9 +18,15 @@ const StampTooltip = ({ stampInfo, setName, tags, children }) => {
           ) : (
             <h3 className={classes.stampDescription}>{stampInfo.name}</h3>
           )}
-          {setName && <p className={classes.tooltipInfo}>{setName}</p>}
-          <p className={classes.tooltipInfo}>{stampInfo.value}</p>
-          <p className={classes.tooltipInfo}>{stampInfo.date}</p>
+          {setName && (
+            <p className={classes.tooltipInfo}>Set Name: {setName}</p>
+          )}
+          <p className={classes.tooltipInfo}>
+            Value: {stampInfo.value ? stampInfo.value : "N/A"}
+          </p>
+          <p className={classes.tooltipInfo}>
+            Date: {stampInfo.date ? stampInfo.date : "N/A"}
+          </p>
           <div className={classes.tagsSection}>
             {tags.map((tag) => (
               <span className={classes.tags} key={tag}>
