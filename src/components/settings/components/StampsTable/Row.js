@@ -4,71 +4,92 @@ import {
   TableCell,
   IconButton,
   TextField,
+  FormControlLabel,
   Checkbox,
+  Autocomplete,
 } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
-import CloseIcon from "@mui/icons-material/Close";
-import CheckIcon from "@mui/icons-material/Check";
+import {
+  Edit as EditIcon,
+  Close as CloseIcon,
+  Check as CheckIcon,
+  CheckBoxOutlineBlank as CheckBoxOutlineBlankIcon,
+  CheckBox as CheckBoxIcon,
+} from "@mui/icons-material";
 import { ThemeProvider } from "@mui/material/styles";
 import useStyles from "./styles.js";
 import theme from "../../../../assets/theme.js";
 
-function Row({ values, setName }) {
+function Row({ values, initialSetName, initialTags, tagsOptions }) {
   const [editing, setEditing] = useState(false);
+  const [name, setName] = useState(values.name);
+  const [date, setDate] = useState(values.date);
+  const [value, setValue] = useState(values.value);
+  const [description, setDescription] = useState(values.description);
+  const [image, setImage] = useState(values.image);
+  const [owned, setOwned] = useState(values.owned);
+  const [height, setHeight] = useState(values.height);
+  const [stampSetName, setStampSetName] = useState(initialSetName);
+  const [tags, setTags] = useState(initialTags);
   const classes = useStyles();
-
-  const [tester, setTester] = useState(false);
 
   return (
     <ThemeProvider theme={theme}>
       <TableRow>
-        <TableCell style={{ width: "15%" }}>
-          {values.name ? (
+        <TableCell style={{ width: "10%" }}>
+          {name ? (
             editing ? (
               <TextField
-              //   value={tester} onChange={handleChange} label={label}
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+                label="Stamp Name"
               />
             ) : (
-              values.name
+              name
             )
           ) : (
             "N/A"
           )}
         </TableCell>
         <TableCell style={{ width: "9%" }}>
-          {values.date ? (
+          {date ? (
             editing ? (
               <TextField
-              //   value={tester} onChange={handleChange} label={label}
+                value={date}
+                onChange={(event) => setDate(event.target.value)}
+                label="Date"
               />
             ) : (
-              values.date
+              date
             )
           ) : (
             "N/A"
           )}
         </TableCell>
         <TableCell style={{ width: "6%" }}>
-          {values.value ? (
+          {value ? (
             editing ? (
               <TextField
-              //   value={tester} onChange={handleChange} label={label}
+                value={value}
+                onChange={(event) => setValue(event.target.value)}
+                label="Value"
               />
             ) : (
-              values.value
+              value
             )
           ) : (
             "N/A"
           )}
         </TableCell>
         <TableCell style={{ width: "15%" }}>
-          {values.description ? (
+          {description ? (
             editing ? (
               <TextField
-              //   value={tester} onChange={handleChange} label={label}
+                value={description}
+                onChange={(event) => setDescription(event.target.value)}
+                label="Description"
               />
             ) : (
-              values.description
+              description
             )
           ) : (
             "N/A"
@@ -76,48 +97,88 @@ function Row({ values, setName }) {
         </TableCell>
         <TableCell style={{ width: "15%" }}>
           {/* TODO: add editable image dialog */}
-          {values.image ? (
-            <img src={values.image} alt="stamp" style={{ width: "100%" }} />
+          {image ? (
+            <img src={image} alt="stamp" style={{ width: "100%" }} />
           ) : (
             "N/A"
           )}
         </TableCell>
         <TableCell style={{ width: "6%" }}>
-          {values.owned ? (
-            <Checkbox disabled={!editing} checked />
-          ) : (
-            <Checkbox disabled={!editing} />
-          )}
+          <FormControlLabel
+            checked={owned}
+            onChange={(event) => setOwned(event.target.value)}
+            control={<Checkbox />}
+            disabled={!editing}
+            style={{ margin: 0 }}
+          />
         </TableCell>
         <TableCell style={{ width: "6%" }}>
-          {values.height ? (
+          {height ? (
             editing ? (
               <TextField
-              //   value={tester} onChange={handleChange} label={label}
+                value={height}
+                onChange={(event) => setHeight(event.target.value)}
+                label="Height"
               />
             ) : (
-              values.height
+              height
             )
           ) : (
             "N/A"
           )}
         </TableCell>
         <TableCell style={{ width: "12%" }}>
-          {setName ? (
+          {stampSetName ? (
             editing ? (
               <TextField
-              //   value={tester} onChange={handleChange} label={label}
+                value={stampSetName}
+                onChange={(event) => setStampSetName(event.target.value)}
+                label="Set Name"
               />
             ) : (
-              setName
+              stampSetName
             )
           ) : (
             "N/A"
           )}
         </TableCell>
-        <TableCell style={{ width: "10%" }}>
-          {/* TODO: add editable tags dialog */}
-          {values.tags ? values.tags : "No tags"}
+        <TableCell style={{ width: "15%" }}>
+          {tags ? (
+            editing ? (
+              <Autocomplete
+                multiple
+                freeSolo
+                disableCloseOnSelect
+                selectOnFocus
+                value={tags}
+                disableClearable
+                forcePopupIcon
+                onChange={(event, values) => {
+                  setTags(values);
+                }}
+                options={tagsOptions.sort()}
+                renderInput={(params) => (
+                  <TextField {...params} label="Tags" variant="outlined" />
+                )}
+                renderOption={(props, option, { selected }) => (
+                  <li {...props}>
+                    <Checkbox
+                      icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
+                      checkedIcon={<CheckBoxIcon fontSize="small" />}
+                      style={{ margin: 0 }}
+                      checked={selected}
+                    />
+                    {option}
+                  </li>
+                )}
+                className={classes.tagsDropdown}
+              />
+            ) : (
+              tags.map((tag) => <div>{tag}</div>)
+            )
+          ) : (
+            "No tags"
+          )}
         </TableCell>
         <TableCell style={{ width: "6%" }}>
           {editing ? (

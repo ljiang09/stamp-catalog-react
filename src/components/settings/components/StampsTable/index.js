@@ -56,7 +56,13 @@ function StampsTable() {
             {stampInfo.hasOwnProperty("sets") &&
               Object.entries(stampInfo.sets).map(([key, value]) => {
                 return value.stamps.map((obj) => (
-                  <Row values={obj} setName={value.setName} key={key} />
+                  <Row
+                    values={obj}
+                    initialSetName={value.setName}
+                    initialTags={value.tags}
+                    tagsOptions={tags}
+                    key={key}
+                  />
                   //   <TableRow key={key}>
                   //     <TableCell>
                   //       {obj.description ? obj.description : "N/A"}
