@@ -52,11 +52,11 @@ function StampsTable() {
           <TableHead>
             <HeaderRow values={headerValues} />
           </TableHead>
-          {/* <TableBody>
+          <TableBody>
             {stampInfo.hasOwnProperty("sets") &&
               Object.entries(stampInfo.sets).map(([key, value]) => {
                 return value.stamps.map((obj) => (
-                  <Row values={obj} key={key} />
+                  <Row values={obj} setName={value.setName} key={key} />
                   //   <TableRow key={key}>
                   //     <TableCell>
                   //       {obj.description ? obj.description : "N/A"}
@@ -78,7 +78,7 @@ function StampsTable() {
                   //   </TableRow>
                 ));
               })}
-            {stampInfo.hasOwnProperty("singles") &&
+            {/* {stampInfo.hasOwnProperty("singles") &&
               Object.entries(stampInfo.singles).map(([key, value]) => (
                 <Row values={value} key={key} />
                 // <TableRow key={key}>
@@ -96,8 +96,8 @@ function StampsTable() {
                 //     <Button onClick={() => console.log("editing")}>Edit</Button>
                 //   </TableCell>
                 // </TableRow>
-              ))}
-          </TableBody> */}
+              ))} */}
+          </TableBody>
         </Table>
       </TableContainer>
     </ThemeProvider>
