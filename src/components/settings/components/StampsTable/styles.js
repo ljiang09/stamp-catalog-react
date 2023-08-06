@@ -5,8 +5,10 @@ const useStyles = makeStyles({
     width: "90% !important",
     minWidth: "1300px !important",
     margin: "auto",
-    marginLeft: "5% !important",
     maxHeight: "70vh",
+  },
+  tagsDropdown: {
+    maxHeight: "200px",
   },
 });
 

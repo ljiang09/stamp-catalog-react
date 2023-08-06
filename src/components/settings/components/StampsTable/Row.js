@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import {
   TableRow,
   TableCell,
@@ -7,6 +7,7 @@ import {
   FormControlLabel,
   Checkbox,
   Autocomplete,
+  Button,
 } from "@mui/material";
 import {
   Edit as EditIcon,
@@ -18,6 +19,7 @@ import {
 import { ThemeProvider } from "@mui/material/styles";
 import useStyles from "./styles.js";
 import theme from "../../../../assets/theme.js";
+import UploadImageDialog from "../../../upload/components/UploadImageDialog/index.js";
 
 function Row({ values, initialSetName, initialTags, tagsOptions }) {
   const [editing, setEditing] = useState(false);
@@ -30,7 +32,108 @@ function Row({ values, initialSetName, initialTags, tagsOptions }) {
   const [height, setHeight] = useState(values.height);
   const [stampSetName, setStampSetName] = useState(initialSetName);
   const [tags, setTags] = useState(initialTags);
+
+  const [openImgUpload, setOpenImgUpload] = useState(false);
+  const [imgUploadType, setImgUploadType] = useState("url");
+  const [imgLink, setImgLink] = useState("");
+  const [imgLinkValid, setImgLinkValid] = useState(false);
+  // TODO: use imgFile properties for file size (to calculate compression), and maybe to display name
+  const [imgFile, setImgFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
+  const [savableImg, setSavableImg] = useState(false);
+
   const classes = useStyles();
+
+  const handleImgUploadClose = () => {
+    setOpenImgUpload(false);
+    setImgLink("");
+    setImgLinkValid(false);
+    setImgFile(null);
+    setImagePreview(null);
+  };
+
+  const handleImgUploadSave = () => {
+    if (imgUploadType === "url") {
+      setImgFile(null);
+      setImagePreview(null);
+    } else {
+      setImgLink("");
+      setImgLinkValid(false);
+    }
+
+    setOpenImgUpload(false);
+  };
+
+  const handleUploadType = (event, newUploadType) => {
+    if (newUploadType) {
+      setImgUploadType(newUploadType);
+    }
+  };
+
+  const handleFileChange = (event) => {
+    setImgFile(event.target.files[0]);
+  };
+
+  // determine if img URL is valid
+  useEffect(() => {
+    const img = new Image();
+    img.onload = () => {
+      setImgLinkValid(true);
+    };
+    img.onerror = () => {
+      setImgLinkValid(false);
+    };
+    img.src = imgLink;
+  }, [imgLink]);
+
+  // store uploaded file as base64 to display
+  useEffect(() => {
+    if (imgFile) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(imgFile);
+    } else {
+      setImagePreview(null);
+    }
+  }, [imgFile]);
+
+  // disable "save" button in image dialog
+  useEffect(() => {
+    if (
+      (imgUploadType === "url" && imgLinkValid) ||
+      (imgUploadType === "file" && imagePreview)
+    ) {
+      setSavableImg(true);
+    } else {
+      setSavableImg(false);
+    }
+  }, [imgUploadType, imgLinkValid, imagePreview]);
+
+  const autocompleteParams = {
+    multiple: true,
+    freeSolo: true,
+    disableCloseOnSelect: true,
+    selectOnFocus: true,
+    disableClearable: true,
+    forcePopupIcon: true,
+  };
+
+  const imgDialogProps = {
+    openImgUpload,
+    imgUploadType,
+    imgLink,
+    setImgLink,
+    imgLinkValid,
+    imgFile,
+    imagePreview,
+    savableImg,
+    handleImgUploadClose,
+    handleUploadType,
+    handleFileChange,
+    handleImgUploadSave,
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -96,8 +199,16 @@ function Row({ values, initialSetName, initialTags, tagsOptions }) {
           )}
         </TableCell>
         <TableCell style={{ width: "15%" }}>
-          {/* TODO: add editable image dialog */}
-          {image ? (
+          {editing ? (
+            <Button
+              onClick={() => {
+                setOpenImgUpload(true);
+              }}
+              style={{ padding: 0 }}
+            >
+              <img src={image} alt="stamp" style={{ width: "100%" }} />
+            </Button>
+          ) : image ? (
             <img src={image} alt="stamp" style={{ width: "100%" }} />
           ) : (
             "N/A"
@@ -146,13 +257,8 @@ function Row({ values, initialSetName, initialTags, tagsOptions }) {
           {tags ? (
             editing ? (
               <Autocomplete
-                multiple
-                freeSolo
-                disableCloseOnSelect
-                selectOnFocus
+                {...autocompleteParams}
                 value={tags}
-                disableClearable
-                forcePopupIcon
                 onChange={(event, values) => {
                   setTags(values);
                 }}
@@ -171,7 +277,8 @@ function Row({ values, initialSetName, initialTags, tagsOptions }) {
                     {option}
                   </li>
                 )}
-                className={classes.tagsDropdown}
+                // className={classes.tagsDropdown}
+                style={{ maxHeight: "100px" }}
               />
             ) : (
               tags.map((tag) => <div>{tag}</div>)
@@ -205,6 +312,7 @@ function Row({ values, initialSetName, initialTags, tagsOptions }) {
           )}
         </TableCell>
       </TableRow>
+      <UploadImageDialog {...imgDialogProps} />
     </ThemeProvider>
   );
 }
