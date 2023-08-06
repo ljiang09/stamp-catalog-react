@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React, useEffect } from "react";
 import { Button, Dialog, Box, Typography, Grid } from "@mui/material";
 import { Image as ImageIcon } from "@mui/icons-material";
 import useStyles from "./styles.js";
@@ -7,12 +7,26 @@ function UploadImageDialog({
   openImgUpload,
   imgFile,
   imagePreview,
+  setImagePreview,
   savableImg,
   handleImgUploadClose,
   handleFileChange,
   handleImgUploadSave,
 }) {
   const classes = useStyles();
+
+  // store uploaded file as base64 to display
+  useEffect(() => {
+    if (imgFile) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(imgFile);
+    } else {
+      setImagePreview(null);
+    }
+  }, [imgFile]);
 
   return (
     <Dialog open={openImgUpload} onClose={handleImgUploadClose}>

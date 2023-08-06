@@ -105,19 +105,6 @@ function UploadOneStamp() {
     });
   }, []);
 
-  // store uploaded file as base64 to display
-  useEffect(() => {
-    if (imgFile) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setImagePreview(reader.result);
-      };
-      reader.readAsDataURL(imgFile);
-    } else {
-      setImagePreview(null);
-    }
-  }, [imgFile]);
-
   // disable "save" button in image dialog
   useEffect(() => {
     if (imagePreview) {
@@ -131,6 +118,7 @@ function UploadOneStamp() {
     openImgUpload,
     imgFile,
     imagePreview,
+    setImagePreview,
     savableImg,
     handleImgUploadClose,
     handleFileChange,

@@ -90,6 +90,7 @@ function Row({ values, initialSetName, initialTags, tagsOptions }) {
     openImgUpload,
     imgFile,
     imagePreview,
+    setImagePreview,
     savableImg,
     handleImgUploadClose,
     handleFileChange,

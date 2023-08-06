@@ -26,6 +26,7 @@ const initialValues = {
   description: "",
   imgLink: "",
   owned: false,
+  imgFile: null,
 };
 
 function UploadSet() {
@@ -36,7 +37,8 @@ function UploadSet() {
 
   const [openImgUpload, setOpenImgUpload] = useState(false);
   // TODO: use imgFile properties for file size (to calculate compression), and maybe to display name
-  const [imgFile, setImgFile] = useState(null);
+  const [currIndex, setCurrIndex] = useState(0);
+
   const [imagePreview, setImagePreview] = useState(null);
   const [savableImg, setSavableImg] = useState(false);
 
@@ -95,10 +97,32 @@ function UploadSet() {
     }
   };
 
+  const handleImgUploadOpen = (index) => {
+    if (inputSets[index].imgFile) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(inputSets[index].imgFile);
+    } else {
+      setImagePreview(null);
+    }
+
+    setCurrIndex(index);
+    setOpenImgUpload(true);
+  };
+
   const handleImgUploadClose = () => {
     setOpenImgUpload(false);
-    setImgFile(null);
     setImagePreview(null);
+
+    const updatedObject = {
+      ...inputSets[currIndex],
+      imgFile: null,
+    };
+    const updatedArray = [...inputSets];
+    updatedArray[currIndex] = updatedObject;
+    setInputSets(updatedArray);
   };
 
   const handleImgUploadSave = () => {
@@ -106,7 +130,14 @@ function UploadSet() {
   };
 
   const handleFileChange = (event) => {
-    setImgFile(event.target.files[0]);
+    // TODO (lily): change this to rely on the index, which means refactoring UploadImageDialog
+    const updatedObject = {
+      ...inputSets[currIndex],
+      imgFile: event.target.files[0],
+    };
+    const updatedArray = [...inputSets];
+    updatedArray[currIndex] = updatedObject;
+    setInputSets(updatedArray);
   };
 
   // TODO: figure out a way to update the tagsOptions upon new tags being entered
@@ -115,18 +146,6 @@ function UploadSet() {
       setTagsOptions(value);
     });
   }, []);
-
-  useEffect(() => {
-    if (imgFile) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setImagePreview(reader.result);
-      };
-      reader.readAsDataURL(imgFile);
-    } else {
-      setImagePreview(null);
-    }
-  }, [imgFile]);
 
   useEffect(() => {
     if (imagePreview) {
@@ -138,8 +157,9 @@ function UploadSet() {
 
   const imgDialogProps = {
     openImgUpload,
-    imgFile,
+    imgFile: inputSets[currIndex].imgFile,
     imagePreview,
+    setImagePreview,
     savableImg,
     handleImgUploadClose,
     handleFileChange,
@@ -257,13 +277,13 @@ function UploadSet() {
               <Button
                 variant="outlined"
                 onClick={() => {
-                  setOpenImgUpload(true);
+                  handleImgUploadOpen(index);
                 }}
                 className={
                   showingImgError ? classes.imgError : classes.imgDialog
                 }
               >
-                {imgFile ? "Edit Image" : "Choose Image"}
+                {inputSets[index].imgFile ? "Edit Image" : "Choose Image"}
               </Button>
               {showingImgError && (
                 <Typography variant="caption">Must select an image</Typography>
