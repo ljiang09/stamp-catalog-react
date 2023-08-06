@@ -91,8 +91,6 @@ function UploadOneStamp() {
   };
 
   const handleImgUploadSave = () => {
-    setImgFile(null);
-    setImagePreview(null);
     setOpenImgUpload(false);
   };
 

@@ -48,8 +48,6 @@ function Row({ values, initialSetName, initialTags, tagsOptions }) {
   };
 
   const handleImgUploadSave = () => {
-    setImgFile(null);
-    setImagePreview(null);
     setOpenImgUpload(false);
   };
 

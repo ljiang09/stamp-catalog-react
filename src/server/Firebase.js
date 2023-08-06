@@ -75,8 +75,8 @@ const uploadSingle = (stampInfo, successCallback) => {
   const uuid = uuidv4();
 
   uploadBytesResumable(
-    // ref_storage(storage, "images/singles/" + uuid),
-    ref_storage(storage, "images/singles/tester/" + uuid),
+    ref_storage(storage, "images/singles/" + uuid),
+    // ref_storage(storage, "images/singles/tester/" + uuid),
     stampInfo.imgFile
   ).then((snapshot) => {
     getDownloadURL(snapshot.ref)
@@ -90,8 +90,8 @@ const uploadSingle = (stampInfo, successCallback) => {
 };
 
 const uploadSingleToDatabase = (uuid, stampInfo, successCallback, fileLink) => {
-  // set(ref_database(db, "stampInfo/singles/" + uuid), {
-  set(ref_database(db, "stampInfo/tester/" + uuid), {
+  set(ref_database(db, "stampInfo/singles/" + uuid), {
+    // set(ref_database(db, "stampInfo/tester/singles/" + uuid), {
     name: stampInfo.name,
     value: stampInfo.value,
     date: stampInfo.date,
@@ -130,4 +130,73 @@ const uploadSingleToDatabase = (uuid, stampInfo, successCallback, fileLink) => {
     });
 };
 
-export { initialPost, retrieveCatalog, retrieveTags, uploadSingle };
+const uploadSet = (stampsInfo, successCallback) => {
+  Promise.all(
+    stampsInfo.map((stampInfo) => {
+      const uuid = uuidv4();
+
+      return uploadBytesResumable(
+        // ref_storage(storage, "images/sets/" + uuid),
+        ref_storage(storage, "images/sets/tester/" + uuid),
+        stampInfo.imgFile
+      ).then((snapshot) => {
+        getDownloadURL(snapshot.ref)
+          .then((url) => {
+            uploadSetToDatabase(uuid, stampInfo, successCallback, url);
+          })
+          .catch((error) => {
+            console.error("Upload to Storage failed", error);
+          });
+      });
+    })
+  )
+    .then((url) => {
+      console.log(`All success`);
+    })
+    .catch((error) => {
+      console.log(`Some failed: `, error.message);
+    });
+};
+
+const uploadSetToDatabase = (uuid, stampInfo, successCallback, fileLink) => {
+  // set(ref_database(db, "stampInfo/sets/" + uuid), {
+  set(ref_database(db, "stampInfo/tester/sets/" + uuid), {
+    name: stampInfo.name,
+    value: stampInfo.value,
+    date: stampInfo.date,
+    description: stampInfo.description,
+    image: fileLink,
+    owned: stampInfo.owned,
+    tags: stampInfo.tags,
+  })
+    .then(function () {
+      if (stampInfo.customTags.length > 0) {
+        // update the custom tags to the tags database
+        get(ref_database(db, "tags/"))
+          .then((snapshot) => {
+            const currTags = snapshot.val() || [];
+            const updatedTags = [...currTags, ...stampInfo.customTags];
+
+            set(ref_database(db, "tags/"), updatedTags)
+              .then(function () {
+                window.alert("Uploaded with custom tags!");
+                successCallback();
+              })
+              .catch(function (error) {
+                console.error("error with updating tags", error);
+              });
+          })
+          .catch((error) => {
+            console.error("error with getting tags from database", error);
+          });
+      } else {
+        window.alert("Uploaded!");
+        successCallback();
+      }
+    })
+    .catch(function (error) {
+      console.error("Synchronization failed", error);
+    });
+};
+
+export { initialPost, retrieveCatalog, retrieveTags, uploadSingle, uploadSet };
