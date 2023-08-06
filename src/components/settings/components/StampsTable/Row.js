@@ -34,9 +34,6 @@ function Row({ values, initialSetName, initialTags, tagsOptions }) {
   const [tags, setTags] = useState(initialTags);
 
   const [openImgUpload, setOpenImgUpload] = useState(false);
-  const [imgUploadType, setImgUploadType] = useState("url");
-  const [imgLink, setImgLink] = useState("");
-  const [imgLinkValid, setImgLinkValid] = useState(false);
   // TODO: use imgFile properties for file size (to calculate compression), and maybe to display name
   const [imgFile, setImgFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
@@ -46,45 +43,19 @@ function Row({ values, initialSetName, initialTags, tagsOptions }) {
 
   const handleImgUploadClose = () => {
     setOpenImgUpload(false);
-    setImgLink("");
-    setImgLinkValid(false);
     setImgFile(null);
     setImagePreview(null);
   };
 
   const handleImgUploadSave = () => {
-    if (imgUploadType === "url") {
-      setImgFile(null);
-      setImagePreview(null);
-    } else {
-      setImgLink("");
-      setImgLinkValid(false);
-    }
-
+    setImgFile(null);
+    setImagePreview(null);
     setOpenImgUpload(false);
-  };
-
-  const handleUploadType = (event, newUploadType) => {
-    if (newUploadType) {
-      setImgUploadType(newUploadType);
-    }
   };
 
   const handleFileChange = (event) => {
     setImgFile(event.target.files[0]);
   };
-
-  // determine if img URL is valid
-  useEffect(() => {
-    const img = new Image();
-    img.onload = () => {
-      setImgLinkValid(true);
-    };
-    img.onerror = () => {
-      setImgLinkValid(false);
-    };
-    img.src = imgLink;
-  }, [imgLink]);
 
   // store uploaded file as base64 to display
   useEffect(() => {
@@ -101,15 +72,12 @@ function Row({ values, initialSetName, initialTags, tagsOptions }) {
 
   // disable "save" button in image dialog
   useEffect(() => {
-    if (
-      (imgUploadType === "url" && imgLinkValid) ||
-      (imgUploadType === "file" && imagePreview)
-    ) {
+    if (imagePreview) {
       setSavableImg(true);
     } else {
       setSavableImg(false);
     }
-  }, [imgUploadType, imgLinkValid, imagePreview]);
+  }, [imagePreview]);
 
   const autocompleteParams = {
     multiple: true,
@@ -122,15 +90,10 @@ function Row({ values, initialSetName, initialTags, tagsOptions }) {
 
   const imgDialogProps = {
     openImgUpload,
-    imgUploadType,
-    imgLink,
-    setImgLink,
-    imgLinkValid,
     imgFile,
     imagePreview,
     savableImg,
     handleImgUploadClose,
-    handleUploadType,
     handleFileChange,
     handleImgUploadSave,
   };

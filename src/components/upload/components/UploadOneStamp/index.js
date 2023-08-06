@@ -28,9 +28,6 @@ function UploadOneStamp() {
   const [tags, setTags] = useState([]);
 
   const [openImgUpload, setOpenImgUpload] = useState(false);
-  const [imgUploadType, setImgUploadType] = useState("url");
-  const [imgLink, setImgLink] = useState("");
-  const [imgLinkValid, setImgLinkValid] = useState(false);
   // TODO: use imgFile properties for file size (to calculate compression), and maybe to display name
   const [imgFile, setImgFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
@@ -48,12 +45,12 @@ function UploadOneStamp() {
     setShowingImgError(false);
     let error = false;
 
-    // only name and image link are required here
+    // only name and image are required here
     if (name.trim().length < 3) {
       error = true;
       setShowingNameError(true);
     }
-    if (!imgLink && !imagePreview) {
+    if (!imagePreview) {
       error = true;
       setShowingImgError(true);
     }
@@ -67,7 +64,6 @@ function UploadOneStamp() {
         value,
         date,
         description,
-        imgLink,
         imgFile,
         owned,
         tags,
@@ -90,28 +86,14 @@ function UploadOneStamp() {
 
   const handleImgUploadClose = () => {
     setOpenImgUpload(false);
-    setImgLink("");
-    setImgLinkValid(false);
     setImgFile(null);
     setImagePreview(null);
   };
 
   const handleImgUploadSave = () => {
-    if (imgUploadType === "url") {
-      setImgFile(null);
-      setImagePreview(null);
-    } else {
-      setImgLink("");
-      setImgLinkValid(false);
-    }
-
+    setImgFile(null);
+    setImagePreview(null);
     setOpenImgUpload(false);
-  };
-
-  const handleUploadType = (event, newUploadType) => {
-    if (newUploadType) {
-      setImgUploadType(newUploadType);
-    }
   };
 
   const handleFileChange = (event) => {
@@ -124,18 +106,6 @@ function UploadOneStamp() {
       setTagsOptions(value);
     });
   }, []);
-
-  // determine if img URL is valid
-  useEffect(() => {
-    const img = new Image();
-    img.onload = () => {
-      setImgLinkValid(true);
-    };
-    img.onerror = () => {
-      setImgLinkValid(false);
-    };
-    img.src = imgLink;
-  }, [imgLink]);
 
   // store uploaded file as base64 to display
   useEffect(() => {
@@ -152,27 +122,19 @@ function UploadOneStamp() {
 
   // disable "save" button in image dialog
   useEffect(() => {
-    if (
-      (imgUploadType === "url" && imgLinkValid) ||
-      (imgUploadType === "file" && imagePreview)
-    ) {
+    if (imagePreview) {
       setSavableImg(true);
     } else {
       setSavableImg(false);
     }
-  }, [imgUploadType, imgLinkValid, imagePreview]);
+  }, [imagePreview]);
 
   const imgDialogProps = {
     openImgUpload,
-    imgUploadType,
-    imgLink,
-    setImgLink,
-    imgLinkValid,
     imgFile,
     imagePreview,
     savableImg,
     handleImgUploadClose,
-    handleUploadType,
     handleFileChange,
     handleImgUploadSave,
   };
@@ -214,7 +176,7 @@ function UploadOneStamp() {
           }}
           className={showingImgError ? classes.imgError : classes.imgDialog}
         >
-          {imgLinkValid || imgFile ? "Edit Image" : "Choose Image"}
+          {imgFile ? "Edit Image" : "Choose Image"}
         </Button>
         {showingImgError && (
           <Typography variant="caption">Must select an image</Typography>

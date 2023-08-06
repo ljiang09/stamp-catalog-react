@@ -4,7 +4,6 @@ import {
   getDatabase,
   ref as ref_database,
   set,
-  push,
 } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-database.js";
 import {
   getDownloadURL,
@@ -12,7 +11,6 @@ import {
   ref as ref_storage,
   uploadBytesResumable,
 } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-storage.js";
-import { useState } from "react";
 
 import { stampInfo } from "../components/catalog/StampData";
 import firebaseConfig from "./config";
@@ -76,33 +74,29 @@ const { v4: uuidv4 } = require("uuid");
 const uploadSingle = (stampInfo, successCallback) => {
   const uuid = uuidv4();
 
-  if (stampInfo.imgLink) {
-    uploadSingleToDatabase(uuid, stampInfo, successCallback, null);
-  } else {
-    uploadBytesResumable(
-      ref_storage(storage, "images/singles/" + uuid),
-      // ref_storage(storage, "images/singles/tester/" + uuid),
-      stampInfo.imgFile
-    ).then((snapshot) => {
-      getDownloadURL(snapshot.ref)
-        .then((url) => {
-          uploadSingleToDatabase(uuid, stampInfo, successCallback, url);
-        })
-        .catch((error) => {
-          console.error("Upload to Storage failed", error);
-        });
-    });
-  }
+  uploadBytesResumable(
+    // ref_storage(storage, "images/singles/" + uuid),
+    ref_storage(storage, "images/singles/tester/" + uuid),
+    stampInfo.imgFile
+  ).then((snapshot) => {
+    getDownloadURL(snapshot.ref)
+      .then((url) => {
+        uploadSingleToDatabase(uuid, stampInfo, successCallback, url);
+      })
+      .catch((error) => {
+        console.error("Upload to Storage failed", error);
+      });
+  });
 };
 
 const uploadSingleToDatabase = (uuid, stampInfo, successCallback, fileLink) => {
-  set(ref_database(db, "stampInfo/singles/" + uuid), {
-    // set(ref_database(db, "stampInfo/tester/" + uuid), {
+  // set(ref_database(db, "stampInfo/singles/" + uuid), {
+  set(ref_database(db, "stampInfo/tester/" + uuid), {
     name: stampInfo.name,
     value: stampInfo.value,
     date: stampInfo.date,
     description: stampInfo.description,
-    image: fileLink ? fileLink : stampInfo.imgLink,
+    image: fileLink,
     owned: stampInfo.owned,
     tags: stampInfo.tags,
   })

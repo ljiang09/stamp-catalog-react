@@ -2,13 +2,14 @@ import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
   dialogGrid: {
-    width: "240px !important",
-    height: "400px !important",
+    padding: "20px",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: "10px",
   },
-  imgToggle: {
-    margin: "20px 0",
-  },
-  imgLinkInput: {
+  uploadBtn: {
     height: "40px",
     width: "200px",
   },
@@ -18,7 +19,6 @@ const useStyles = makeStyles({
     alignItems: "center",
     width: "200px",
     height: "200px",
-    marginTop: "10px",
   },
   img: {
     maxHeight: "100%",
@@ -31,7 +31,6 @@ const useStyles = makeStyles({
     width: "200px",
     height: "200px",
     background: "lightgray",
-    marginTop: "10px",
   },
   imgPlaceholderIcon: {
     fontSize: "50px !important",
@@ -39,10 +38,14 @@ const useStyles = makeStyles({
   },
   text: { color: "gray" },
   imgDialogButtons: {
-    padding: "10px 20px",
     display: "flex",
-    justifyContent: "flex-end",
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
+    gap: "10px",
+    "& button": {
+      width: "95px",
+    },
   },
 });
 
