@@ -4,6 +4,7 @@ import NavigationBar from "./components/NavigationBar";
 import Catalog from "./components/catalog/Catalog";
 import Upload from "./components/upload/Upload";
 import Settings from "./components/settings/Settings";
+import Profile from "./components/profile/Profile";
 import PageNotFound from "./components/PageNotFound";
 import StampInfo from "./components/stampinfo/StampInfo";
 
@@ -20,6 +21,7 @@ function App() {
         <Route exact path="/" element={<Catalog />} />
         <Route path="/upload" element={<Upload />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/info/:id" element={<StampInfo />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>

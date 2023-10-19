@@ -16,6 +16,10 @@ function NavigationBar() {
         <NavLink to="/settings" activeClassName="active-link">
           Settings
         </NavLink>
+        {"  |  "}
+        <NavLink to="/profile" activeClassName="active-link">
+          Profile
+        </NavLink>
         {/* {"  |  "}
         <NavLink to="/favorites" activeClassName="active-link">Favorites</NavLink> */}
       </nav>

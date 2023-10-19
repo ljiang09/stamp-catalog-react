@@ -60,6 +60,8 @@
 
 Add user authentication (but make it optional)
 
+- display log in/out errors in UI
+
 Restrict realtime database / storage rules:
 
 - anyone can read

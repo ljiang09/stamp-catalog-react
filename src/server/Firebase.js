@@ -11,6 +11,13 @@ import {
   ref as ref_storage,
   uploadBytesResumable,
 } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-storage.js";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+} from "https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js";
+// https://firebase.google.com/docs/web/learn-more#libraries-cdn
 
 import { stampInfo } from "../components/catalog/StampData";
 import firebaseConfig from "./config";
@@ -199,4 +206,58 @@ const uploadSetToDatabase = (uuid, stampInfo, successCallback, fileLink) => {
     });
 };
 
-export { initialPost, retrieveCatalog, retrieveTags, uploadSingle, uploadSet };
+/*
+ *
+ * AUTHENTICATION STUFF HERE
+ *
+ */
+
+const auth = getAuth();
+const provider = new GoogleAuthProvider();
+
+const logIn = (successCallback) => {
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      // const credential = GoogleAuthProvider.credentialFromResult(result);
+      // const token = credential.accessToken;
+      const user = result.user;
+      successCallback(user);
+    })
+    .catch((error) => {
+      // TODO: make UI display error here
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      const email = error.customData.email;
+      const credential = GoogleAuthProvider.credentialFromError(error);
+
+      console.log(
+        "error with signing in",
+        errorCode,
+        errorMessage,
+        email,
+        credential
+      );
+    });
+};
+
+const logOut = (successCallback) => {
+  signOut(auth)
+    .then(() => {
+      successCallback();
+    })
+    .catch((error) => {
+      // TODO: make UI display error here
+      console.log("sign out error", error);
+    });
+};
+
+export {
+  initialPost,
+  retrieveCatalog,
+  retrieveTags,
+  uploadSingle,
+  uploadSet,
+  logIn,
+  logOut,
+};
