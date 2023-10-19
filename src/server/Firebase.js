@@ -132,7 +132,7 @@ const uploadSingleToDatabase = (uuid, stampInfo, successCallback, fileLink) => {
 
 const uploadSet = (stampsInfo, successCallback) => {
   Promise.all(
-    stampsInfo.map((stampInfo) => {
+    stampsInfo.inputSets.map((stampInfo) => {
       const uuid = uuidv4();
 
       return uploadBytesResumable(
@@ -150,32 +150,14 @@ const uploadSet = (stampsInfo, successCallback) => {
       });
     })
   )
-    .then((url) => {
-      console.log(`All success`);
-    })
-    .catch((error) => {
-      console.log(`Some failed: `, error.message);
-    });
-};
-
-const uploadSetToDatabase = (uuid, stampInfo, successCallback, fileLink) => {
-  // set(ref_database(db, "stampInfo/sets/" + uuid), {
-  set(ref_database(db, "stampInfo/tester/sets/" + uuid), {
-    name: stampInfo.name,
-    value: stampInfo.value,
-    date: stampInfo.date,
-    description: stampInfo.description,
-    image: fileLink,
-    owned: stampInfo.owned,
-    tags: stampInfo.tags,
-  })
-    .then(function () {
-      if (stampInfo.customTags.length > 0) {
+    .then(() => {
+      console.log("Uploaded all images!");
+      if (stampsInfo.customTags.length > 0) {
         // update the custom tags to the tags database
         get(ref_database(db, "tags/"))
           .then((snapshot) => {
             const currTags = snapshot.val() || [];
-            const updatedTags = [...currTags, ...stampInfo.customTags];
+            const updatedTags = [...currTags, ...stampsInfo.customTags];
 
             set(ref_database(db, "tags/"), updatedTags)
               .then(function () {
@@ -193,6 +175,24 @@ const uploadSetToDatabase = (uuid, stampInfo, successCallback, fileLink) => {
         window.alert("Uploaded!");
         successCallback();
       }
+    })
+    .catch((error) => {
+      console.log(`Some failed: `, error.message);
+    });
+};
+
+const uploadSetToDatabase = (uuid, stampInfo, successCallback, fileLink) => {
+  // set(ref_database(db, "stampInfo/sets/" + uuid), {
+  set(ref_database(db, "stampInfo/tester/sets/" + uuid), {
+    name: stampInfo.name,
+    value: stampInfo.value,
+    date: stampInfo.date,
+    description: stampInfo.description,
+    image: fileLink,
+    owned: stampInfo.owned,
+  })
+    .then(function () {
+      successCallback();
     })
     .catch(function (error) {
       console.error("Synchronization failed", error);

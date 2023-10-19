@@ -24,9 +24,10 @@ const initialValues = {
   value: "",
   date: "",
   description: "",
-  imgLink: "",
   owned: false,
   imgFile: null,
+  showingNameError: false,
+  showingImgError: false,
 };
 
 function UploadSet() {
@@ -43,8 +44,6 @@ function UploadSet() {
   const [savableImg, setSavableImg] = useState(false);
 
   const [showingSetNameError, setShowingSetNameError] = useState(false);
-  const [showingNameError, setShowingNameError] = useState(false);
-  const [showingImgError, setShowingImgError] = useState(false);
 
   const [tagsOptions, setTagsOptions] = useState([]);
 
@@ -54,46 +53,58 @@ function UploadSet() {
   const classes = useStyles();
 
   const addStamp = () => {
-    console.log("TODO (lily): adding a new stamp input");
     setInputSets([...inputSets, { ...initialValues }]);
   };
 
   const handleClick = () => {
-    setShowingSetNameError(false);
-    setShowingNameError(false);
-    setShowingImgError(false);
-    let error = false; // TODO (lily): probably can remove this variable completely
+    let error = false;
 
+    setShowingSetNameError(false);
     if (stampSetName.trim().length < 3) {
-      error = true;
       setShowingSetNameError(true);
-    }
-    // TODO: map all the values and set specific errors
-    if (inputSets[0].name.trim().length < 3) {
       error = true;
-      setShowingNameError(true);
     }
-    // TODO: figure out some way to verify that the submitted link is valid
-    if (inputSets[0].imgLink.trim().length < 3) {
-      error = true;
-      setShowingImgError(true);
-    }
+
+    let updatedObject = {};
+    inputSets.forEach((inputSet, index) => {
+      if (inputSet.name.trim().length < 3) {
+        updatedObject = {
+          ...inputSet,
+          showingNameError: true,
+          showingImgError: false,
+        };
+        error = true;
+      } else {
+        updatedObject = {
+          ...inputSet,
+          showingNameError: false,
+          showingImgError: false,
+        };
+      }
+      const updatedArray = [...inputSets];
+      updatedArray[index] = updatedObject;
+      setInputSets(updatedArray);
+    });
 
     // if all good, submit to firebase
     if (!error) {
-      const stampInfo = {
+      const customTags = tags.filter((option) => !tagsOptions.includes(option));
+
+      const stampsInfo = {
         inputSets,
         tags,
+        customTags,
       };
 
       const clearInputs = () => {
         // TODO: need to remove all the "added" set inputs
-        setInputSets(initialValues);
+        setCurrIndex(0);
+        setInputSets([initialValues]);
         setStampSetName("");
         setTags([]);
       };
 
-      // uploadSet(stampInfo, clearInputs);
+      uploadSet(stampsInfo, clearInputs);
     }
   };
 
@@ -130,11 +141,13 @@ function UploadSet() {
   };
 
   const handleFileChange = (event) => {
-    // TODO (lily): change this to rely on the index, which means refactoring UploadImageDialog
+    // TODO (lily): change this to rely on the index
+
     const updatedObject = {
       ...inputSets[currIndex],
       imgFile: event.target.files[0],
     };
+
     const updatedArray = [...inputSets];
     updatedArray[currIndex] = updatedObject;
     setInputSets(updatedArray);
@@ -209,8 +222,9 @@ function UploadSet() {
           )}
           className={classes.tags}
         />
-
         {inputSets.map((inputSet, index) => {
+          const showingNameError = inputSet.showingNameError;
+          const showingImgError = inputSet.showingImgError;
           return (
             <>
               <h3 style={{ marginBottom: 0 }}>Stamp #{index + 1}</h3>
@@ -272,8 +286,6 @@ function UploadSet() {
                 label="Description"
                 info="Brief overview"
               />
-              {/* TODO: add button that shows a dialog. there, choose between uploading or setting url */}
-              {/* TODO: make this different reference for each object */}
               <Button
                 variant="outlined"
                 onClick={() => {
