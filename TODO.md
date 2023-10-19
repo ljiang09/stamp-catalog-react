@@ -20,7 +20,6 @@
 
 ## Upload
 
-- implement upload capabilities for sets
 - create second column for interactive preview, to show what the stamp will look
   like in the catalog
 - BUG: There is some kind of error sometimes when uploading a single stamp. not
@@ -56,3 +55,16 @@
 
 - Make a split-flap display type thing where you can connect this app and it'll
   physically flip to the stamps you're viewing
+
+## Server
+
+Add user authentication (but make it optional)
+
+Restrict realtime database / storage rules:
+
+- anyone can read
+- only i can write (which means only i need to be authenticated)
+
+Stretch goal: create different user roles so we can restrict reading even more -
+maybe random users can only access a portion of the database as to not overwhelm
+the server
