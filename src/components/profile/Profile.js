@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import { Button, Typography } from "@mui/material";
-import { logIn, logOut } from "../../server/Firebase";
+import { logIn, logOut } from "../../server/authentication";
 
 function Profile() {
   const initialUser = sessionStorage.getItem("user");

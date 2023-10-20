@@ -2,7 +2,7 @@ import { Autocomplete, TextField } from "@mui/material";
 import { React, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { retrieveCatalog, retrieveTags } from "../../server/Firebase";
+import { retrieveCatalog, retrieveTags } from "../../server/firebaseInit";
 
 import StampButton from "./components/StampButton";
 import BinderImage from "./StampBinder.png";

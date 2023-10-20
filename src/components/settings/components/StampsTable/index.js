@@ -11,7 +11,7 @@ import {
 import { ThemeProvider } from "@mui/material/styles";
 import HeaderRow from "./HeaderRow";
 import Row from "./Row";
-import { retrieveCatalog, retrieveTags } from "../../../../server/Firebase.js";
+import { retrieveCatalog, retrieveTags } from "../../../../server/firebaseInit";
 import useStyles from "./styles.js";
 import theme from "../../../../assets/theme.js";
 

@@ -13,7 +13,8 @@ import {
   CheckBox as CheckBoxIcon,
 } from "@mui/icons-material";
 
-import { retrieveTags, uploadSingle } from "../../../../server/Firebase";
+import { retrieveTags } from "../../../../server/firebaseInit";
+import { uploadSingle } from "../../../../server/uploadStamps";
 
 import InputField from "../InputField";
 import UploadImageDialog from "../UploadImageDialog";
