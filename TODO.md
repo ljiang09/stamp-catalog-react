@@ -58,14 +58,7 @@
 
 ## Server
 
-Add user authentication (but make it optional)
-
 - display log in/out errors in UI
-
-Restrict realtime database / storage rules:
-
-- anyone can read
-- only i can write (which means only i need to be authenticated)
 
 Stretch goal: create different user roles so we can restrict reading even more -
 maybe random users can only access a portion of the database as to not overwhelm

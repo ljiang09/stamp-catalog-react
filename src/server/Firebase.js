@@ -228,7 +228,7 @@ const logIn = (successCallback) => {
       // TODO: make UI display error here
       const errorCode = error.code;
       const errorMessage = error.message;
-      const email = error.customData.email;
+      const email = error.customData?.email;
       const credential = GoogleAuthProvider.credentialFromError(error);
 
       console.log(
